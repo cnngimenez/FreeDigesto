@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  fecha_cambio: 2019-06-27
+  norma: 
+  comentario: MyText
+  fecha_creacion: 2019-06-27
+  causa_cambio_estado: 
+  estado: 
+
+two:
+  fecha_cambio: 2019-06-27
+  norma: 
+  comentario: MyText
+  fecha_creacion: 2019-06-27
+  causa_cambio_estado: 
+  estado: 

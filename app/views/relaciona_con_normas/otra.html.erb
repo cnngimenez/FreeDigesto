@@ -1,0 +1,48 @@
+
+    <!-- otra.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1> ¿Qué desea hacer? </h1>
+
+<p> ¿Desea agregar otra relación? </p>
+
+<% if params[:id_norma].nil?    
+      # No usó una norma inicial ni tampoco el asitente
+      # Si no usó una norma inicial no puede haber usado el asistente.
+      %>
+
+    <%= link_to 'Sí.', :action => "new" %>
+    <%= link_to 'No, volver al menú principal.', :controller => 'pagina_principal'  %>
+
+
+<% else
+     # Usa una norma inicial.
+     if params[:asistente].nil?
+       #Usó asistente
+       %>
+       <%= link_to 'Sí.', :action => "new", :id_norma => @norma_inicial, :asistente => true %>
+       <%= link_to 'No, continuar con el asistente', 
+         :controller => "agregar_descriptores", 
+         :action => 'seleccionar_desc_gen',
+         :id => @norma_inicial %>       
+    <% end %>
+<% end %>
+    
+
+

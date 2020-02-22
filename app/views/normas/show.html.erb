@@ -1,0 +1,176 @@
+
+    <!-- show.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<h1>
+  Norma Número <%=h @norma.numero %>
+</h1>
+
+<%  if (@norma.general) %>
+  <p><i> El alcance de esta norma es <b>general</b>.</i></p>
+<% else %>
+  <p><i> El alcance de esta norma es <b>particular</b>.</i></p>
+<% end %>
+
+<p>
+  <b>Tipo norma:</b>
+  <%= link_to @norma.tipo_norma.nombre, @norma.tipo_norma %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <% if @estado_actual.nil? %>
+    Estado no definido.
+  <% else %>
+    <%= link_to @estado_actual.nombre, @estado_actual%>
+  <% end %>
+</p>
+
+<p>
+  <b>Lugar publicacion:</b>
+  <%= link_to @norma.lugar_publicacion.nombre, @norma.lugar_publicacion %>
+</p>
+
+<br>
+
+<h2> Sumario </h2>
+<div>
+  <%=h @norma.sumario %>
+</div>
+
+<h2> Texto de la Norma </h2>
+<div>
+  <% if @texto_vacio %>
+    <p style="color:red"> ¡El texto de la norma está vacío! </p>
+    <% if @puede_agregar_editar %>
+      <%= link_to "Agregar el texto", :controller => "nueva_norma", :action => "subir_texto", :id => @norma, :modificando => true %>
+    <% end %>
+  <% else %>
+    <%= @norma.texto %>
+  <% end %>
+</div>
+
+
+<h2> Citas </h2>
+
+<br>
+
+<h3> Citas Doctorales </h3>
+<div>
+  <% if @citas_doctorales_vacias %>
+    <p style="color:red"> ¡Las citas doctorales están vacías! </p>
+    <% if @puede_agregar_editar %>
+      <%= link_to "Agregar las citas", :controller => "nueva_norma", :action => "agregar_citas", :id => @norma, :modificando => true %>
+    <% end %>
+  <% else %>
+    <%= @norma.citas_doctorales %>
+  <% end %>
+</div>
+
+<br>
+
+<h3> Citas Jurisprudenciales </h3>
+<div>
+  <% if @citas_juris_vacias %>
+    <p style="color:red"> ¡Las citas jurisprudenciales están vacías! </p>
+    <% if @puede_agregar_editar %>
+      <%= link_to "Agregar las citas", :controller => "nueva_norma", :action => "agregar_citas", :id => @norma, :modificando => true %>
+    <% end %>
+  <% else %>
+    <%= @norma.citas_jurisprudenciales %>
+  <% end %>
+</div>
+
+<br>
+
+<h2> Comentarios </h2>
+<div>
+  <% if @comentario_vacio %>
+    <p style="color:red"> ¡El comentario está vacío! </p>
+    <% if @puede_agregar_editar %>
+      <%= link_to "Agregar comentarios", :controller => "nueva_norma", :action => "agregar_comentarios", :id => @norma, :modificando => true %>
+    <% end %>
+  <% else %>
+    <%= @norma.comentarios %>
+  <% end %>  
+</div>
+
+<h2> Fechas </h2>
+<ul>
+  <li>Fecha sanción:
+  <%=h @norma.fecha_sancion.day %> / <%= @norma.fecha_sancion.month %> /
+  <%=h @norma.fecha_sancion.year %>
+  </li>
+  <li>Fecha promulgación:
+  <%=h @norma.fecha_promulgacion.day %> / <%= @norma.fecha_promulgacion.month %> /
+  <%=h @norma.fecha_promulgacion.year %>
+  </li>
+  <li>Fecha publicación:
+  <%=h @norma.fecha_publicacion.day %> / <%= @norma.fecha_publicacion.month %> /
+  <%=h @norma.fecha_publicacion.year %>
+  </li>  
+</ul>
+
+<h2> Descriptores que posee esta norma </h2>
+
+<% @lstDescriptores.each do |desc| %>
+<% # ¿No parece una pérdida de eficiencia? A esta altura se pudo contar más o menos%>
+<% # una eficiencia de 2 * n1 + n1 * n2 %>
+<% # 2 * n1 es por la búsqueda de los descriptores en norma_controller %>
+<% # ¡n1 * n2 es por el recorrido de cada descriptor particular por cada descriptor general! %>
+<% # Igualmente se supone que esto va a estar en un servidor "PODEROSO"... %>
+  <ul>
+  <li> <%= link_to desc.nombre, desc%> </li>
+    <ul>
+      <% @lstDescParts.each do |descpart| %>
+        <% if descpart.descriptor_general_id == desc.id  %>
+          <li><%= link_to descpart.nombre, descpart %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </ul>
+<% end %>
+
+<div class="comandos">
+<p>
+  <% if @puede_agregar_editar %>
+    <%= link_to 'Modificar Norma o Agregar Elementos Faltantes', :controller => "modificar_norma", :action => "modificar_norma", :id => @norma %> |
+  <% end %>
+  <% if @puede_editar %>
+    <%= link_to 'Editar Norma(Avanzado)', :action => "edit", :id => @norma %> |
+  <% end %>
+  <% if @puede_cambiar_estado %>
+    <%= link_to 'Cambiar Estado', :controller => "cambio_estados", :id => @norma %> |
+  <% end %>
+  <% if @puede_mirar_historico %>
+    <%= link_to 'Ver Histórico de Cambio de Estados', :controller => "historico_estados", :id_norma => @norma %> |
+  <% end %>
+  <% if @puede_mirar_relaciones %>
+    <%= link_to 'Ver las normas relacionadas', :controller => 'relaciona_con_normas', :id_norma => @norma %> |
+  <% end %> 
+  <%= link_to 'Amigable a la Impresión',{:action => 'amigable_impresion', :id => @norma} %> |
+  <%= link_to 'Principal', {:controller => "pagina_principal"}, :target => "main" %>
+</p>
+<p>
+  <% if @puede_borrar %>
+    <%= link_to '<b style="color: red">Link de la muerte:</b> Borrar norma', @norma, :confirm => '¿Está seguro?', :method => :delete %>
+  <% end %>
+</p>
+</div>
+

@@ -1,0 +1,84 @@
+<script type="text/javascript">
+  function cambiar_tamano_b(){
+      formulario = document.getElementById('tamano_b');
+      formulario.submit(); 
+  }
+  function cambiar_tamano_a(){
+      formulario = document.getElementById('tamano_a');
+      formulario.submit();
+  }
+</script>
+
+<h1> Amigable a la Impresión </h1>
+
+<p> Se le presentarán dos tipos de formas en que se presentará la
+  norma para imprimir. </p>
+<p> Escoja la que usted más guste y presione siguiente. La norma para
+  imprimir se abrirá en otra "pestaña" o "ventana".</p>
+
+<ul>
+  <li><%= link_to "Imprimir Todo(tamaño 12pt)", {
+	  :action => 'vista_impresion_a',
+    :id => @norma }, 
+    :target => "blank"%></li>
+  <ul>
+    <li> <%= link_to "Con tamaño chico(8pt)", {
+	     :action => 'vista_impresion_a',
+      :id => @norma,
+      :tamano => 8}, 
+      :target => "blank"%></li>
+    <li> <%= link_to "Con tamaño medio(10pt)", {
+	     :action => 'vista_impresion_a',
+      :id => @norma,
+      :tamano => 10}, 
+      :target => "blank"%></li>
+    <li> <%= link_to "Con tamaño grande(15pt)", {
+	     :action => 'vista_impresion_a',
+      :id => @norma,
+      :tamano => 15}, 
+      :target => "blank"%></li>
+    <li> Otro Tamaño: 
+      <% form_for (:vista_imp,
+	 :url => {:action => 'vista_impresion_a', :id => @norma},
+      :html => {:id => 'tamano_a', :target => 'blank'}) do |f| %>
+      <%= f.text_field :tamano, :value => '12'%>
+      <%= link_to 'Cambiar tamaño', 'javascript:cambiar_tamano_a()' %>
+      <% end %>
+    </li>
+  </ul>
+  <li>
+    <%= link_to "Formato Original de la Norma(tamaño 12pt)", {
+	:action =>'vista_impresion_b',
+    :id => @norma },
+    :target => "blank"%></li> 
+  <ul>
+    <li> <%= link_to "Con tamaño chico(8pt)", {
+	     :action =>'vista_impresion_b',      
+      :id => @norma,
+      :tamano => 8}, 
+      :target => "blank"%></li>
+    <li> <%= link_to "Con tamaño medio(10pt)", {
+	     :action =>'vista_impresion_b',      
+      :id => @norma,
+      :tamano => 10}, 
+      :target => "blank"%></li>
+    <li> <%= link_to "Con tamaño grande(15pt)", {
+	     :action =>'vista_impresion_b',      
+      :id => @norma,
+      :tamano => 15}, 
+      :target => "blank"%></li>
+    <li> Otro Tamaño: 
+      <% form_for (:vista_imp,
+	 :url => {:action => 'vista_impresion_b', :id => @norma},
+      :html => {:id => 'tamano_b', :target => 'blank'}) do |f| %>
+      <%= f.text_field :tamano, :value => '12'%>
+      <%= link_to 'Cambiar tamaño', 'javascript:cambiar_tamano_b()' %>
+      <% end %>
+    </li>
+  </ul>
+</ul>
+
+<div class="comandos">
+  <%= link_to "Principal", {:controller => "pagina_principal"},
+  :target => "main" %>
+</div>

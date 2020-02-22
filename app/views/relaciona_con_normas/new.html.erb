@@ -1,0 +1,104 @@
+
+    <!-- new.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1>Nueva Relación entre Normas </h1>
+
+<p> Para crear una relación entre dos normas debe indicar las dos normas relacionadas
+y qué tipo de relación es. </p>
+<p> Recuerde que la relación es bidireccional, por lo cual no debe incorporar
+la relación de la norma 1 a la 2 y viceversa, sólo es necesario una </p>
+
+<p> Ejemplo: </p>
+<p> Supóngase dos normas: la norma 022/10 y la 010/80.  </p>
+<p> Si se desea relacionarlas sólo basta con agregar que la norma 022/10 se
+relaciona con la 010/80.</p>
+<p> Una vez agregada esta relación, <b> no debe </b> agregar que la 010/80
+se relaciona con la norma 022/10.</p>
+
+<br />
+
+<% if @norma_inicial.nil?
+    #no se ha definido la normaA...
+    %>
+    <% form_for @relaciona_con_norma, :url => {:action => "create"} do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+      Numero de la primer norma:<br />
+      <%= text_field :relacion, :normaA_num %>
+    </p>
+    <p>
+      Tipo de la segunda norma: <br />
+      <%= collection_select(:relacion, :tipo_normaA, get_tipos_norma, :id, :nombre) %>
+    </p>
+    <p>
+      Numero de la segunda norma:<br />
+      <%= text_field :relacion, :normaB_num %>
+    </p>
+    <p>
+      Tipo de la segunda norma: <br />
+      <%= collection_select(:relacion, :tipo_normaB, get_tipos_norma, :id, :nombre) %>
+    </p>
+    <p>
+      <%= f.label :tipo_relacion_id %><br />
+      <%= f.collection_select(:tipo_relacion_id, get_tipo_relaciones, :id, :nombre) %>
+    </p>
+    <p>
+      <%= f.submit "Crear" %>
+    </p>
+    <% end %>
+
+<% else
+    # Ya hay una norma inicial seleccionada
+  %>
+    <% form_for @relaciona_con_norma, :url => {:action => "create", :id_norma => @norma_inicial} do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+      Usted seleccionó la norma numero <b>
+        <%= @norma_inicial.numero %>
+        </b>
+      de tipo <b>
+        <%= @norma_inicial.tipo_norma.nombre %>
+        </b>
+    </p>
+    <p>
+      <%= link_to 'Ver Primer Norma(En nueva ventana)', @norma_inicial, :target => "blank" %>
+    </p>
+    <p>
+      Numero de la segunda norma:<br />
+      <%= text_field :relacion, :normaB_num %>
+    </p>
+    <p>
+      Tipo de la segunda norma: <br />
+      <%= collection_select(:relacion, :tipo_normaB, get_tipos_norma, :id, :nombre) %>
+    </p>
+    <p>
+      <%= f.label :tipo_relacion_id %><br />
+      <%= f.collection_select(:tipo_relacion_id, get_tipo_relaciones, :id, :nombre) %>
+    </p>
+    <p>
+      <%= f.submit "Crear" %>
+    </p>
+    <% end %>
+<% end %>
+<%= link_to 'Atrás', :back %> |
+<%= link_to 'Ir al listado', :action => 'index' %> |
+<%= link_to 'Principal', :controller => 'pagina_principal' %>

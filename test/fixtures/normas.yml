@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  numero: MyString
+  tipo_norma: 
+  comentarios: MyText
+  sumario: MyText
+  citas_doctorales: MyText
+  citas_jurisprudenciales: MyText
+  general: false
+  texto: MyText
+  fecha_publicacion: 2019-06-27
+  fecha_sancion: 2019-06-27
+  fecha_promulgacion: 2019-06-27
+  lugar_publicacion: 
+
+two:
+  numero: MyString
+  tipo_norma: 
+  comentarios: MyText
+  sumario: MyText
+  citas_doctorales: MyText
+  citas_jurisprudenciales: MyText
+  general: false
+  texto: MyText
+  fecha_publicacion: 2019-06-27
+  fecha_sancion: 2019-06-27
+  fecha_promulgacion: 2019-06-27
+  lugar_publicacion: 

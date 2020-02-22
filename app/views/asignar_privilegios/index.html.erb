@@ -1,0 +1,47 @@
+
+    <!-- index.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Domingo 17 De Octubre Del 2010     -->
+
+
+<h1> Asignar Privilegios </h1>
+
+<p> Usted puede asignar privilegios a un usuario de dos maneras: </p>
+<ul>
+  <li>
+    <%= link_to "Asignando privilegios uno a uno", :controller=>"tiene_privilegios", :action => "new", :usr_id => params[:usr_id] %>
+  </li>
+  <li> 
+    <%= link_to "Asignando un patrón de privilegios", :action => "asignar_patron", :usr_id => params[:usr_id] %>
+  </li>
+</ul>
+
+<p> Los patrones de privilegios son un conjunto de privilegios que se asignan a
+un usuario de forma inmediata. Al indicar un patrón a un usuario, todos los privilegios
+que posee tal patrón son dados al usuario seleccionado. </p>
+
+<% if @usuario.nil? %>
+  <p> Usted no seleccionó ningún usuario </p>
+<% else %>
+  <p> Usted seleccionó al usuario <b> <%= link_to h(@usuario.nombre), @usuario %> </b> para asignarle privilegios.</p>
+<% end %>
+
+<div class="comandos">
+  <p>
+    <%= link_to 'Principal', :controller => 'pagina_principal' %>
+  </p>
+</div>

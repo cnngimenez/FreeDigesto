@@ -1,0 +1,42 @@
+<h1>Listing normas</h1>
+
+<table>
+  <tr>
+    <th>Numero</th>
+    <th>Tipo norma</th>
+    <th>Comentarios</th>
+    <th>Sumario</th>
+    <th>Citas doctorales</th>
+    <th>Citas jurisprudenciales</th>
+    <th>General</th>
+    <th>Texto</th>
+    <th>Fecha publicacion</th>
+    <th>Fecha sancion</th>
+    <th>Fecha promulgacion</th>
+    <th>Lugar publicacion</th>
+  </tr>
+
+<% @normas.each do |norma| %>
+  <tr>
+    <td><%=h norma.numero %></td>
+    <td><%=h norma.tipo_norma %></td>
+    <td><%=h norma.comentarios %></td>
+    <td><%=h norma.sumario %></td>
+    <td><%=h norma.citas_doctorales %></td>
+    <td><%=h norma.citas_jurisprudenciales %></td>
+    <td><%=h norma.general %></td>
+    <td><%=h norma.texto %></td>
+    <td><%=h norma.fecha_publicacion %></td>
+    <td><%=h norma.fecha_sancion %></td>
+    <td><%=h norma.fecha_promulgacion %></td>
+    <td><%=h norma.lugar_publicacion %></td>
+    <td><%= link_to 'Show', norma %></td>
+    <td><%= link_to 'Edit', edit_norma_path(norma) %></td>
+    <td><%= link_to 'Destroy', norma, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New norma', new_norma_path %>

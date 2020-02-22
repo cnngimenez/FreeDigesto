@@ -1,0 +1,82 @@
+
+    <!-- edit.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<h1>Editar Norma</h1>
+
+<% form_for(@norma) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :numero %><br />
+    <%= f.text_field :numero %>
+  </p>
+  <p>
+    <%= f.label :tipo_norma_id %><br />
+    <%= f.collection_select :tipo_norma_id, get_tipos_norma, :id, :nombre %>
+  </p>  
+  <p>
+    <%= f.label :general %><br />
+    <%= f.check_box :general %>
+  </p>
+  <p>
+    <%= f.label :lugar_publicacion_id %><br />
+    <%= f.collection_select :lugar_publicacion_id, get_lugares_publicacion, :id, :nombre%>
+  </p>
+  <p>
+    <%= f.label :sumario %><br />
+    <%= f.text_area :sumario, :cols => 100, :rows => 20  %>
+  </p>
+  <p>
+    <%= f.label :comentarios %><br />
+    <%= f.text_area :comentarios, :cols => 100, :rows => 20  %>
+  </p>  
+  <p>
+    <%= f.label :citas_doctorales %><br />
+    <%= f.text_area :citas_doctorales, :cols => 100, :rows => 20  %>
+  </p>
+  <p>
+    <%= f.label :citas_jurisprudenciales %><br />
+    <%= f.text_area :citas_jurisprudenciales, :cols => 100, :rows => 20  %>
+  </p>  
+  <p>
+    <%= f.label :texto %><br />
+    <%= f.text_area :texto, :cols => 100, :rows => 100  %>
+  </p>
+  <p>
+    <%= f.label :fecha_publicacion %><br />
+    <%= f.date_select :fecha_publicacion %>
+  </p>
+  <p>
+    <%= f.label :fecha_sancion %><br />
+    <%= f.date_select :fecha_sancion %>
+  </p>
+  <p>
+    <%= f.label :fecha_promulgacion %><br />
+    <%= f.date_select :fecha_promulgacion %>
+  </p>  
+  <p>
+    <%= f.submit "Cambiar" %>
+  </p>
+<% end %>
+
+<%= link_to 'Cambiar Estado', :controller => "cambio_estados", :id => @norma %> |
+<%= link_to 'Mostrar', @norma %> |
+<%= link_to 'Atrás', :back %> |
+<%= link_to 'Principal', :controller => 'pagina_principal' %>

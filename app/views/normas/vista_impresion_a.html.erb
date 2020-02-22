@@ -1,0 +1,189 @@
+
+    <!-- show.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+<% unless @tamano.nil? %>
+<style type="text/css" media="all">
+<!--
+    p {
+    font-size: <%= @tamano %>pt;
+    }
+    div.texto{ 
+    font-size: <%= @tamano %>pt;
+    }
+    li {
+    font-size: <%= @tamano %>pt;
+    }
+    td {
+    font-size: <%= @tamano %>pt;
+    }
+
+-->
+</style>
+<% end %>
+
+<div id="texto">
+<h1>
+  Norma Número <%=h @norma.numero %>
+</h1>
+
+<%  if (@norma.general) %>
+  <p class="txtChico"><i> El alcance de esta norma es <b>general</b>.</i></p>
+<% else %>
+  <p class="txtChico"><i> El alcance de esta norma es <b>particular</b>.</i></p>
+<% end %>
+
+<p class="txtChico">
+  <b>Tipo norma:</b>
+  <%= @norma.tipo_norma.nombre  %>
+</p>
+
+<p class="txtChico">
+  <b>Estado:</b>
+  <% if @estado_actual.nil? %>
+    Estado no definido.
+  <% else %>
+    <%= @estado_actual.nombre %>
+  <% end %>
+</p>
+
+<p class="txtChico">
+  <b>Lugar publicacion:</b>
+  <%= @norma.lugar_publicacion.nombre %>
+</p>
+
+<br>
+
+<h2> Sumario </h2>
+<div>
+  <%=h @norma.sumario %>
+</div>
+
+<h2> Texto de la Norma </h2>
+<div>
+  <% if (@norma.texto.nil? or 
+     @norma.texto.empty?)
+     %>
+  <i> No tiene texto. </i>
+  <% else %>
+  <%= @norma.texto %>
+  <% end %>
+</div>
+
+
+<h2> Citas </h2>
+
+<br>
+
+<h3> Citas Doctorales </h3>
+<div>
+  <% if (@norma.citas_doctorales.nil? or 
+     @norma.citas_doctorales.empty?)
+     %>
+  <i> No tiene citas doctorales. </i>
+  <% else %>
+  <%= @norma.citas_doctorales %>
+  <% end %>
+</div>
+
+<br>
+
+<h3> Citas Jurisprudenciales </h3>
+<div>
+  <% if (@norma.citas_jurisprudenciales.nil? or 
+     @norma.citas_jurisprudenciales.empty?)
+     %>
+  <i> No tiene citas jurisprudenciales. </i>
+  <% else %>
+  <%= @norma.citas_jurisprudenciales %>
+  <% end %>
+</div>
+
+<br>
+
+<h2> Comentarios </h2>
+<div>
+  <% if (@norma.comentarios.nil? or 
+     @norma.comentarios.empty?)
+     %>
+  <i> No tiene comentarios. </i>
+  <% else %>
+  <%= @norma.comentarios %>
+  <% end %>
+</div>
+
+<h2> Fechas </h2>
+<ul>
+  <li class="txtChico">Fecha publicación:
+  <%=h @norma.fecha_publicacion.day %> / <%= @norma.fecha_publicacion.month %> /
+  <%=h @norma.fecha_publicacion.year %>
+  </li>
+  <li class="txtChico">Fecha sanción:
+  <%=h @norma.fecha_sancion.day %> / <%= @norma.fecha_sancion.month %> /
+  <%=h @norma.fecha_sancion.year %>
+  </li>
+  <li class="txtChico">Fecha promulgación:
+  <%=h @norma.fecha_promulgacion.day %> / <%= @norma.fecha_promulgacion.month %> /
+  <%=h @norma.fecha_promulgacion.year %>
+  </li>
+</ul>
+
+<h2> Descriptores que posee esta norma </h2>
+
+<% if @lstDescriptores.empty? %>
+<p class="txtChico"> No tiene descriptores definidos aún. </p>
+<% end %>
+
+<% @lstDescriptores.each do |desc| %>
+<% # ¿No parece una pérdida de eficiencia? A esta altura se pudo contar más o menos%>
+<% # una eficiencia de 2 * n1 + n1 * n2 %>
+<% # 2 * n1 es por la búsqueda de los descriptores en norma_controller %>
+<% # ¡n1 * n2 es por el recorrido de cada descriptor particular por cada descriptor general! %>
+<% # Igualmente se supone que esto va a estar en un servidor "PODEROSO"... %>
+  <ul>
+  <li class="txtChico"> <%= link_to desc.nombre, desc%> </li>
+    <ul>
+      <% @lstDescParts.each do |descpart| %>
+        <% if descpart.descriptor_general_id == desc.id  %>
+          <li class="txtChico"><%= link_to descpart.nombre, descpart %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </ul>
+<% end %>
+
+<p class="txtChico"> <i>Sistema <u>Free</u>Digesto</i> ¡Use Software Libre!(<i>http://www.fsf.org</i>)
+Licencia GPL V3(<i>http://www.gnu.org/licences</i>) </p>
+
+</div>
+
+<% unless @tamano.nil? %>
+<script type="text/javascript">  
+  txt = document.getElementById("texto");
+  txt.style.fontSize = '<%= @tamano %>pt';
+
+  txt = document.getElementsByClassName('txtChico');
+  var i = 0
+  while (i < txt.length){
+	      txt.item(i).style.fontSize = '<%= @tamano %>pt';
+	      i = i  + 1;
+  }
+
+</script>
+<% end %>
+

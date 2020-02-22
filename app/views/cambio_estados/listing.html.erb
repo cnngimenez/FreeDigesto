@@ -1,0 +1,52 @@
+
+    <!-- listing.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1>Listing cambio_estados</h1>
+
+<table>
+  <tr>
+    <th>Fecha cambio</th>
+    <th>Norma</th>
+    <th>Comentario</th>
+    <th>Fecha creacion</th>
+    <th>Causa cambio estado</th>
+    <th>Estado</th>
+  </tr>
+
+<% for cambio_estado in @cambio_estados %>
+  <tr>
+    <td><%=h cambio_estado.fecha_cambio.strftime("%d / %m / %Y") %></td>
+    <td><%= link_to(
+      cambio_estado.norma.tipo_norma.nombre + ' ' + cambio_estado.norma.numero,
+      cambio_estado.norma)%></td>
+    <td><%=h cambio_estado.comentario %></td>
+    <td><%=h cambio_estado.fecha_creacion.strftime("%d / %m / %Y") %></td>
+    <td><%= link_to cambio_estado.causa_cambio_estado.nombre, cambio_estado.causa_cambio_estado %></td>
+    <td><%= link_to cambio_estado.estado.nombre, cambio_estado.estado %></td>
+    <td><%= link_to 'Mostrar', cambio_estado %></td>
+    <td><%= link_to 'Editar', edit_cambio_estado_path(cambio_estado) %></td>
+    <td><%= link_to 'Eliminar', cambio_estado, :confirm => '¿Está seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Principal', :controller => 'pagina_principal' %>

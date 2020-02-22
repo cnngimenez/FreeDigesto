@@ -1,0 +1,42 @@
+
+    <!-- index.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<h1> Asistente para Crear Normas </h1>
+
+<p>Pasos del asistente: </p>
+<ol>
+  <li> Información básica de la norma </li>
+  <li> Subir texto de la norma </li>
+  <li> Planificar Cambios de Estados </li>
+  <li> Relacionar la norma </li>
+  <li> Determinar descriptores </li>
+  <ol>
+    <li>Determinar descriptor general</li>
+    <li>Determinar descriptor particular</li>
+  </ol>
+</ol>
+<br>
+
+<p>
+  <%= link_to "Comenzar >>", :controller => "nueva_norma", :action => "crear_norma" %>
+</p>
+<p>
+  <%= link_to 'Cancelar y volver', {:controller => "pagina_principal"}, :target => "main" %>
+</p>

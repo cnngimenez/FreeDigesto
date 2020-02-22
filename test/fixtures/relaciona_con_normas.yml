@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  norma_a: 
+  norma_b: 
+  tipo_relacion: 
+
+two:
+  norma_a: 
+  norma_b: 
+  tipo_relacion: 

@@ -1,0 +1,57 @@
+
+    <!-- edit.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1>Editar Cambio Aplicado</h1>
+
+<% form_for(@cambio_aplicado) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fecha_aplicado %><br />
+    <%= f.date_select :fecha_aplicado, :order => [:day, :month, :year] %>
+  </p>
+  <p>
+    Cambio de Estado: <br />
+    <%= link_to(
+      'Planificado para: ' +
+      @cambio_aplicado.cambio_estado.fecha_cambio.strftime("%d / %m / %Y") + 
+      '<br /> para la norma:  ' +
+      @cambio_aplicado.cambio_estado.norma.tipo_norma.nombre + ' ' +
+      @cambio_aplicado.cambio_estado.norma.numero +
+        '<br /><i> (Se abre en una nueva ventana) </i>',
+      @cambio_aplicado.cambio_estado,
+      :target => 'blank') %>
+  </p>
+  <p>
+    <%= f.label :comentario %><br />
+    <%= f.text_area :comentario %>
+  </p>
+  <p>
+    <%= f.submit "Cambiar" %>
+  </p>
+<% end %>
+
+<div class="comandos">
+  <p>
+    <%= link_to 'Mostrar', @cambio_aplicado %> |
+    <%= link_to 'Atrás', :back %> |
+    <%= link_to 'Principal', :controller => 'pagina_principal' %>
+  </p>
+</div>

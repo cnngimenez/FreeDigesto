@@ -1,0 +1,75 @@
+
+    <!-- new.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<h1>Nuevo Descriptor Particular</h1>
+
+<script type="text/javascript">
+  function elegir(id,nombre){
+    var did;
+    var nom;
+    did = document.getElementById("descriptor_particular_descriptor_general_id");
+    did.value = id;
+    nom = document.getElementById("nombre_descriptor")
+    nom.value = nombre
+  }
+
+</script>
+
+<% form_for(@descriptor_particular) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </p>
+  <p>
+    <%= f.label :comentario %><br />
+    <%= f.text_area :comentario %>
+  </p>
+
+  <p> Elija un descriptor general al cual pertenece </p>
+
+  <% @descriptores.each do |desc|  %>
+    <ul>
+      <li>
+        <%=   link_to desc.nombre, "javascript:elegir(#{desc.id},'#{desc.nombre}')" %>
+      </li>
+    </ul>
+  <% end %>
+
+  <p>
+    Usted Eligió:
+  </p>
+  <p>
+    <input type="text" id="nombre_descriptor" readonly>
+  </p>
+
+  <p>
+    <!-- <%= f.label :descriptor_general_id %><br /> -->    
+    <%= f.text_field :descriptor_general_id, :style => "visibility : hidden"%>
+  </p>
+  <p>
+    <%= f.submit "Crear" %>
+  </p>
+<% end %>
+
+<%= link_to 'Atrás', :back %> |
+<%= link_to 'Ir al listado', :action => 'index' %> |
+<%= link_to 'Principal', :controller => 'pagina_principal' %>

@@ -1,0 +1,44 @@
+
+    <!-- index.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<h1>Listado "Posee Descriptor Particular"</h1>
+
+<table>
+  <tr>
+    <th>Norma</th>
+    <th>Descriptor particular</th>
+  </tr>
+
+<% for posee_desc_part in @posee_desc_parts %>
+  <tr>
+    <td><%=h posee_desc_part.norma.numero %></td>
+    <td><%=h posee_desc_part.descriptor_particular.nombre %></td>
+    <td><%= link_to 'Mostrar', posee_desc_part %></td>
+    <td><%= link_to 'Editar', edit_posee_desc_part_path(posee_desc_part) %></td>
+    <td><%= link_to 'Eliminar', posee_desc_part, :confirm => '¿Está Seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo "Posee Descriptor Particular"', new_posee_desc_part_path %> |
+<%= link_to 'Atrás', :back %> |
+<%= link_to 'Principal', :controller => 'pagina_principal' %>
