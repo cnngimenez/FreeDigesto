@@ -1,0 +1,14 @@
+syntax: regexp
+.*\~
+.*\#
+\.bundle.*
+db/.*\.sqlite3
+db/.*\.sqlite3-.*
+log/.*
+tmp/.*
+storage/.*
+public/assets/.*
+\.byebug_history
+
+config/master\.key
+config/database\.yml
