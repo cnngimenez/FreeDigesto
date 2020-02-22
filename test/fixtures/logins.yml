@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  nombre_usuario: MyString
-  clave: MyString
-
-two:
-  nombre_usuario: MyString
-  clave: MyString

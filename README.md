@@ -1,15 +1,24 @@
-# Requerimientos
-- Ruby 1.9.2
-- Rails 2.3.8
+# README
 
-# License
-This project is under the license [GPLv3](http://www.gnu.org/licenses/gpl.html). For more information, read the COPYING.txt file.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Este proyecto está bajo la licencia [GPLv3](http://www.gnu.org/licenses/gpl.html). Para más información, léase el archivo COPYING.txt.
+Things you may want to cover:
 
-![GPL Image](http://www.gnu.org/graphics/gplv3-127x51.png)
+* Ruby version
 
-## Links Recomendados
+* System dependencies
 
-* [Free Software Foundation](https://fsf.org) : https://fsf.org
-* [The GNU Project](https://gnu.org) : https://gnu.org
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
