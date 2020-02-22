@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha cambio:</strong>
+  <%= @cambio_estado.fecha_cambio %>
+</p>
+
+<p>
+  <strong>Norma:</strong>
+  <%= @cambio_estado.norma %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @cambio_estado.comentario %>
+</p>
+
+<p>
+  <strong>Fecha creacion:</strong>
+  <%= @cambio_estado.fecha_creacion %>
+</p>
+
+<p>
+  <strong>Causa cambio estado:</strong>
+  <%= @cambio_estado.causa_cambio_estado %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @cambio_estado.estado %>
+</p>
+
+<%= link_to 'Edit', edit_cambio_estado_path(@cambio_estado) %> |
+<%= link_to 'Back', cambio_estados_path %>

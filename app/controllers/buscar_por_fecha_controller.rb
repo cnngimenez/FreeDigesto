@@ -1,0 +1,2 @@
+class BuscarPorFechaController < ApplicationController
+end

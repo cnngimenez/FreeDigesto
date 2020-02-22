@@ -1,0 +1,32 @@
+<%= form_with(model: cambio_aplicado, local: true) do |form| %>
+  <% if cambio_aplicado.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cambio_aplicado.errors.count, "error") %> prohibited this cambio_aplicado from being saved:</h2>
+
+      <ul>
+      <% cambio_aplicado.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha_aplicado %>
+    <%= form.datetime_select :fecha_aplicado %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cambio_estado_id %>
+    <%= form.text_field :cambio_estado_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comentario %>
+    <%= form.text_area :comentario %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

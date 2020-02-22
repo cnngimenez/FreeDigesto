@@ -1,0 +1,2 @@
+class PaginaPrincipalController < ApplicationController
+end

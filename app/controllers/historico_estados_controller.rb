@@ -1,0 +1,2 @@
+class HistoricoEstadosController < ApplicationController
+end

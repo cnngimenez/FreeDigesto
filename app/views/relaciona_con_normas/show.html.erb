@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Norma a:</strong>
+  <%= @relaciona_con_norma.norma_a %>
+</p>
+
+<p>
+  <strong>Norma b:</strong>
+  <%= @relaciona_con_norma.norma_b %>
+</p>
+
+<p>
+  <strong>Tipo relacion:</strong>
+  <%= @relaciona_con_norma.tipo_relacion %>
+</p>
+
+<%= link_to 'Edit', edit_relaciona_con_norma_path(@relaciona_con_norma) %> |
+<%= link_to 'Back', relaciona_con_normas_path %>

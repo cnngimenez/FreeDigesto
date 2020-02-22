@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :relaciona_con_normas
+  resources :tipo_relacions
+  resources :cambio_aplicados
+  resources :cambio_estados
+  resources :causa_cambio_estados
   resources :logins
   resources :agregar_privilegios
   resources :patron_privilegios

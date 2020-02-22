@@ -1,0 +1,2 @@
+class QuitarDescriptorController < ApplicationController
+end

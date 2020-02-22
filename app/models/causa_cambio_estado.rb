@@ -1,0 +1,2 @@
+class CausaCambioEstado < ApplicationRecord
+end

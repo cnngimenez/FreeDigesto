@@ -1,0 +1,2 @@
+class UltimasNormasController < ApplicationController
+end

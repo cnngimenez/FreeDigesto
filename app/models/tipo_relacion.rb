@@ -1,0 +1,2 @@
+class TipoRelacion < ApplicationRecord
+end

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Relaciona Con Normas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Norma a</th>
+      <th>Norma b</th>
+      <th>Tipo relacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @relaciona_con_normas.each do |relaciona_con_norma| %>
+      <tr>
+        <td><%= relaciona_con_norma.norma_a %></td>
+        <td><%= relaciona_con_norma.norma_b %></td>
+        <td><%= relaciona_con_norma.tipo_relacion %></td>
+        <td><%= link_to 'Show', relaciona_con_norma %></td>
+        <td><%= link_to 'Edit', edit_relaciona_con_norma_path(relaciona_con_norma) %></td>
+        <td><%= link_to 'Destroy', relaciona_con_norma, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Relaciona Con Norma', new_relaciona_con_norma_path %>

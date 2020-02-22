@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  norma_a: one
+  norma_b: one
+  tipo_relacion: one
+
+two:
+  norma_a: two
+  norma_b: two
+  tipo_relacion: two

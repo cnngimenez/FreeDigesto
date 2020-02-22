@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha aplicado:</strong>
+  <%= @cambio_aplicado.fecha_aplicado %>
+</p>
+
+<p>
+  <strong>Cambio estado:</strong>
+  <%= @cambio_aplicado.cambio_estado %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @cambio_aplicado.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_cambio_aplicado_path(@cambio_aplicado) %> |
+<%= link_to 'Back', cambio_aplicados_path %>

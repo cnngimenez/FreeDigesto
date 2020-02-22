@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fecha_aplicado: 2020-02-22 18:17:38
+  cambio_estado: one
+  comentario: MyText
+
+two:
+  fecha_aplicado: 2020-02-22 18:17:38
+  cambio_estado: two
+  comentario: MyText

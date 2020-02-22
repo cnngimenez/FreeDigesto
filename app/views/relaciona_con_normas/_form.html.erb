@@ -1,0 +1,32 @@
+<%= form_with(model: relaciona_con_norma, local: true) do |form| %>
+  <% if relaciona_con_norma.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(relaciona_con_norma.errors.count, "error") %> prohibited this relaciona_con_norma from being saved:</h2>
+
+      <ul>
+      <% relaciona_con_norma.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :norma_a_id %>
+    <%= form.text_field :norma_a_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :norma_b_id %>
+    <%= form.text_field :norma_b_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo_relacion_id %>
+    <%= form.text_field :tipo_relacion_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

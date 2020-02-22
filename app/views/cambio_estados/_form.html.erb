@@ -1,0 +1,47 @@
+<%= form_with(model: cambio_estado, local: true) do |form| %>
+  <% if cambio_estado.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cambio_estado.errors.count, "error") %> prohibited this cambio_estado from being saved:</h2>
+
+      <ul>
+      <% cambio_estado.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :fecha_cambio %>
+    <%= form.date_select :fecha_cambio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :norma_id %>
+    <%= form.text_field :norma_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comentario %>
+    <%= form.text_area :comentario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_creacion %>
+    <%= form.date_select :fecha_creacion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :causa_cambio_estado_id %>
+    <%= form.text_field :causa_cambio_estado_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estado_id %>
+    <%= form.text_field :estado_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

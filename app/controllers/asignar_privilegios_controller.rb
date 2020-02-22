@@ -1,0 +1,2 @@
+class AsignarPrivilegiosController < ApplicationController
+end

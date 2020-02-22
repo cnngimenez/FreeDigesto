@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @causa_cambio_estado.nombre %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @causa_cambio_estado.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_causa_cambio_estado_path(@causa_cambio_estado) %> |
+<%= link_to 'Back', causa_cambio_estados_path %>

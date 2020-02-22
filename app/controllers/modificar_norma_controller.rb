@@ -1,0 +1,2 @@
+class ModificarNormaController < ApplicationController
+end

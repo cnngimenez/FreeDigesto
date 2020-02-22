@@ -1,0 +1,2 @@
+class CambioEstadosAVencerController < ApplicationController
+end
