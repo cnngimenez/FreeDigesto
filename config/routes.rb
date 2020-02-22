@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   resources :lugar_publicacions
   resources :estados
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get 'pagina_principal', to: 'pagina_principal#index'
+  get 'banner', to: 'banner#index'
+  get 'cambio_estados_a_vencer', to: 'cambio_estados_a_vencer#index'
 end
