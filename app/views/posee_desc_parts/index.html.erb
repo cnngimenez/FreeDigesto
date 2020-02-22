@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posee Desc Parts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Norma</th>
+      <th>Descriptor particular</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posee_desc_parts.each do |posee_desc_part| %>
+      <tr>
+        <td><%= posee_desc_part.norma %></td>
+        <td><%= posee_desc_part.descriptor_particular %></td>
+        <td><%= link_to 'Show', posee_desc_part %></td>
+        <td><%= link_to 'Edit', edit_posee_desc_part_path(posee_desc_part) %></td>
+        <td><%= link_to 'Destroy', posee_desc_part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Posee Desc Part', new_posee_desc_part_path %>

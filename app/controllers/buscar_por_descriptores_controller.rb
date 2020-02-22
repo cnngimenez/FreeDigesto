@@ -1,0 +1,2 @@
+class BuscarPorDescriptoresController < ApplicationController
+end

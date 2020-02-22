@@ -1,0 +1,2 @@
+class TipoNorma < ApplicationRecord
+end

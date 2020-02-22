@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @lugar_publicacion.nombre %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @lugar_publicacion.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_lugar_publicacion_path(@lugar_publicacion) %> |
+<%= link_to 'Back', lugar_publicacions_path %>

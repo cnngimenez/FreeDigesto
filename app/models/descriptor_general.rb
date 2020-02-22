@@ -1,0 +1,2 @@
+class DescriptorGeneral < ApplicationRecord
+end

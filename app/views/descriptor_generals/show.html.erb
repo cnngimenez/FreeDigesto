@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @descriptor_general.nombre %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @descriptor_general.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_descriptor_general_path(@descriptor_general) %> |
+<%= link_to 'Back', descriptor_generals_path %>

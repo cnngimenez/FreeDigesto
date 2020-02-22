@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Descriptor Particulars</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Comentario</th>
+      <th>Descriptor general</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @descriptor_particulars.each do |descriptor_particular| %>
+      <tr>
+        <td><%= descriptor_particular.nombre %></td>
+        <td><%= descriptor_particular.comentario %></td>
+        <td><%= descriptor_particular.descriptor_general %></td>
+        <td><%= link_to 'Show', descriptor_particular %></td>
+        <td><%= link_to 'Edit', edit_descriptor_particular_path(descriptor_particular) %></td>
+        <td><%= link_to 'Destroy', descriptor_particular, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Descriptor Particular', new_descriptor_particular_path %>

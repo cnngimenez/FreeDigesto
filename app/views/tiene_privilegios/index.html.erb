@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tiene Privilegios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Privilegio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tiene_privilegios.each do |tiene_privilegio| %>
+      <tr>
+        <td><%= tiene_privilegio.usuario %></td>
+        <td><%= tiene_privilegio.privilegio %></td>
+        <td><%= link_to 'Show', tiene_privilegio %></td>
+        <td><%= link_to 'Edit', edit_tiene_privilegio_path(tiene_privilegio) %></td>
+        <td><%= link_to 'Destroy', tiene_privilegio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tiene Privilegio', new_tiene_privilegio_path %>

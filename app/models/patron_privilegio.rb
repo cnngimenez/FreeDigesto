@@ -1,0 +1,2 @@
+class PatronPrivilegio < ApplicationRecord
+end

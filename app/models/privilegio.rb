@@ -1,0 +1,2 @@
+class Privilegio < ApplicationRecord
+end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  comentario: MyText
+  descriptor_general: one
+
+two:
+  nombre: MyString
+  comentario: MyText
+  descriptor_general: two

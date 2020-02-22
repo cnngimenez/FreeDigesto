@@ -1,0 +1,2 @@
+class AgregarDescriptoresController < ApplicationController
+end

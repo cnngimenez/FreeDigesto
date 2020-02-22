@@ -1,0 +1,2 @@
+class BuscarPorNumeroController < ApplicationController
+end

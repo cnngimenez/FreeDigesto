@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posee Descriptors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Norma</th>
+      <th>Descriptor general</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posee_descriptors.each do |posee_descriptor| %>
+      <tr>
+        <td><%= posee_descriptor.norma %></td>
+        <td><%= posee_descriptor.descriptor_general %></td>
+        <td><%= link_to 'Show', posee_descriptor %></td>
+        <td><%= link_to 'Edit', edit_posee_descriptor_path(posee_descriptor) %></td>
+        <td><%= link_to 'Destroy', posee_descriptor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Posee Descriptor', new_posee_descriptor_path %>

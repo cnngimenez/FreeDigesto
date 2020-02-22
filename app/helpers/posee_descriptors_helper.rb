@@ -1,0 +1,2 @@
+module PoseeDescriptorsHelper
+end

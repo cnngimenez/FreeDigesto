@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @patron_privilegio.nombre %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @patron_privilegio.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_patron_privilegio_path(@patron_privilegio) %> |
+<%= link_to 'Back', patron_privilegios_path %>

@@ -1,0 +1,82 @@
+<%= form_with(model: norma, local: true) do |form| %>
+  <% if norma.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(norma.errors.count, "error") %> prohibited this norma from being saved:</h2>
+
+      <ul>
+      <% norma.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :numero %>
+    <%= form.text_field :numero %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comentarios %>
+    <%= form.text_area :comentarios %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sumario %>
+    <%= form.text_field :sumario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :citas_doctorales %>
+    <%= form.text_area :citas_doctorales %>
+  </div>
+
+  <div class="field">
+    <%= form.label :citas_jurisprudenciales %>
+    <%= form.text_area :citas_jurisprudenciales %>
+  </div>
+
+  <div class="field">
+    <%= form.label :general %>
+    <%= form.check_box :general %>
+  </div>
+
+  <div class="field">
+    <%= form.label :texto %>
+    <%= form.text_area :texto %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_publicacion %>
+    <%= form.date_select :fecha_publicacion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_sancion %>
+    <%= form.date_select :fecha_sancion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_promulgacion %>
+    <%= form.date_select :fecha_promulgacion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo_norma_id %>
+    <%= form.text_field :tipo_norma_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estado_id %>
+    <%= form.text_field :estado_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lugar_publicacion_id %>
+    <%= form.text_field :lugar_publicacion_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

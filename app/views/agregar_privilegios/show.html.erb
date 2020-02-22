@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Privilegio:</strong>
+  <%= @agregar_privilegio.Privilegio %>
+</p>
+
+<p>
+  <strong>Patron privilegio:</strong>
+  <%= @agregar_privilegio.Patron_privilegio %>
+</p>
+
+<%= link_to 'Edit', edit_agregar_privilegio_path(@agregar_privilegio) %> |
+<%= link_to 'Back', agregar_privilegios_path %>

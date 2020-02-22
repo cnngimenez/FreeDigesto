@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Descriptor Generals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Comentario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @descriptor_generals.each do |descriptor_general| %>
+      <tr>
+        <td><%= descriptor_general.nombre %></td>
+        <td><%= descriptor_general.comentario %></td>
+        <td><%= link_to 'Show', descriptor_general %></td>
+        <td><%= link_to 'Edit', edit_descriptor_general_path(descriptor_general) %></td>
+        <td><%= link_to 'Destroy', descriptor_general, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Descriptor General', new_descriptor_general_path %>

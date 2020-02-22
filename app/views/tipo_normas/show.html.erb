@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @tipo_norma.nombre %>
+</p>
+
+<p>
+  <strong>Comentario:</strong>
+  <%= @tipo_norma.comentario %>
+</p>
+
+<%= link_to 'Edit', edit_tipo_norma_path(@tipo_norma) %> |
+<%= link_to 'Back', tipo_normas_path %>

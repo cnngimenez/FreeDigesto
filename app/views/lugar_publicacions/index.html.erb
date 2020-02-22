@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lugar Publicacions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Comentario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lugar_publicacions.each do |lugar_publicacion| %>
+      <tr>
+        <td><%= lugar_publicacion.nombre %></td>
+        <td><%= lugar_publicacion.comentario %></td>
+        <td><%= link_to 'Show', lugar_publicacion %></td>
+        <td><%= link_to 'Edit', edit_lugar_publicacion_path(lugar_publicacion) %></td>
+        <td><%= link_to 'Destroy', lugar_publicacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lugar Publicacion', new_lugar_publicacion_path %>

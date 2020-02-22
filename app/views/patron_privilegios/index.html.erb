@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Patron Privilegios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Comentario</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @patron_privilegios.each do |patron_privilegio| %>
+      <tr>
+        <td><%= patron_privilegio.nombre %></td>
+        <td><%= patron_privilegio.comentario %></td>
+        <td><%= link_to 'Show', patron_privilegio %></td>
+        <td><%= link_to 'Edit', edit_patron_privilegio_path(patron_privilegio) %></td>
+        <td><%= link_to 'Destroy', patron_privilegio, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Patron Privilegio', new_patron_privilegio_path %>

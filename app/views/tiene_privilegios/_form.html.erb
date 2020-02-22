@@ -1,0 +1,27 @@
+<%= form_with(model: tiene_privilegio, local: true) do |form| %>
+  <% if tiene_privilegio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tiene_privilegio.errors.count, "error") %> prohibited this tiene_privilegio from being saved:</h2>
+
+      <ul>
+      <% tiene_privilegio.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :usuario_id %>
+    <%= form.text_field :usuario_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :privilegio_id %>
+    <%= form.text_field :privilegio_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

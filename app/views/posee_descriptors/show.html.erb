@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Norma:</strong>
+  <%= @posee_descriptor.norma %>
+</p>
+
+<p>
+  <strong>Descriptor general:</strong>
+  <%= @posee_descriptor.descriptor_general %>
+</p>
+
+<%= link_to 'Edit', edit_posee_descriptor_path(@posee_descriptor) %> |
+<%= link_to 'Back', posee_descriptors_path %>
