@@ -32,4 +32,25 @@ class TienePrivilegio < ApplicationRecord
   validates_uniqueness_of :usuario_id, :scope => [:privilegio_id],
                           :message => 'Ese usuario ya tiene ese privilegio.'
 
+  # Devuelve true si el usuario con "usuario_id" tiene el privilegio
+  # para realizar la acción "accion".
+  # Las acciones deben estar almacenadas en la tabla "Privilegios".
+  def TienePrivilegio.usuario_tiene_privilegio(accion, usuario_id)
+    # Buscar el Id de esa acción
+    privid = Privilegio.find_by_nombre(accion)
+
+    # Si no se encontró(retornó nil) devolver false(no tiene privilegios
+    # porque no existe!)
+    if (privid.nil?)
+      return false
+    end
+
+    #Buscar con el usuario y con el privilegio.
+    encontrado = TienePrivilegio.find_by_usuario_id(
+      usuario_id,
+      :conditions => ["privilegio_id = ?",privid])
+
+    #Si fue encontrado entonces
+    return !encontrado.nil?
+  end
 end
