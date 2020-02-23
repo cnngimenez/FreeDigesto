@@ -1,0 +1,176 @@
+
+    /* principal.css */
+    /* Copyright (C) 2010  Giménez, Christian N. */
+
+    /* This program is free software: you can redistribute it and/or modify */
+    /* it under the terms of the GNU General Public License as published by */
+    /* the Free Software Foundation, either version 3 of the License, or */
+    /* (at your option) any later version. */
+
+    /* This program is distributed in the hope that it will be useful, */
+    /* but WITHOUT ANY WARRANTY; without even the implied warranty of */
+    /* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the */
+    /* GNU General Public License for more details. */
+
+    /* You should have received a copy of the GNU General Public License */
+    /* along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+
+    /* Jueves 07 De Octubre Del 2010     */
+
+
+/* html { 
+        background-color: #bbf;       
+ }*/
+
+frame {  
+        background-color: #bbf;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-style: none;
+        border-color: #f00;
+        background-image: url(../images/fondo.png);    
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        }
+
+frameset { 
+           background-color: #bbf;
+           margin-bottom: 0px;
+           margin-top: 0px;
+           margin-left: 0px;
+           margin-right: 0px;
+           padding-top: 0px;
+           padding-bottom: 0px;
+           padding-left: 0px;
+           padding-right: 0px;
+           border-style: none;
+           border-color: #0f0;
+           }
+
+body.banner { 
+              background-color: transparent;
+              /*background-color: #bbf;
+              color: #333;
+	      */
+	      color: #006;
+              background-image: none
+              }
+body.logout { 
+              background-color: #bbf;
+              background-image: url(../images/fondo.png);    
+              background-attachment: fixed;
+              background-repeat: no-repeat;
+              background-position: center center;
+              }
+
+body.login { 
+              background-color: #bbf;
+              background-image: url(../images/fondo.png);    
+              background-attachment: fixed;
+              background-repeat: no-repeat;
+              background-position: center center;
+              }
+
+
+body.vencimientos{ 
+                   background-color: transparent;
+                   /*background-color: #bbf;
+                   color: #333;
+		   */
+                   background-image: none                   
+                   }
+
+
+body { 
+    /*background-color: #ddf;*/
+    /*color: #333;*/
+    color: #0000aa;
+    background-color: transparent;
+/*
+  background-image: url(../images/fondo.png);    
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center center;
+  */
+}
+
+body, p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size:   13px;
+    line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { 
+    /*color: #000;*/
+    color: #000066;
+}
+/*a:visited { 
+            color: #777;
+}*/
+a:hover { 
+/*    color: #fff;
+    background-color:#000;     
+*/
+    background-color: #000066;
+    color: #fff;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+
+/* Para cambio_estados_a_vencer */
+.vencido{ 
+          color: #800;
+ }
+
+.noVencido{ 
+            color: #080;
+ }

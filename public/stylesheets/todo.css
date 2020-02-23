@@ -1,0 +1,33 @@
+#postamble {
+    background-color: #8888ff;
+    border-top-style: dashed;
+    border-top-width: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.timestamp-wrapper {
+    color: #008800;
+    border-style: dotted;
+    border-width: 1px;
+}
+
+
+.timestamp-kwd {
+    color: #008800;
+    text-decoration: blink;
+    font-variant: small-caps;
+    font-style: italic;
+}
+
+.timestamp {
+    color: #119911;
+    font-variant: small-caps;
+}
+
+body {
+    background-color: #bbbbff;
+    background-image: url('/images/fondo.png');
+}
