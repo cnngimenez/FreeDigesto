@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_22_211735) do
+ActiveRecord::Schema.define(version: 2020_02_23_011917) do
 
   create_table "agregar_privilegios", force: :cascade do |t|
     t.integer "Privilegio_id"
