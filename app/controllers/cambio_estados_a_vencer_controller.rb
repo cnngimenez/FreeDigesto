@@ -26,7 +26,7 @@ class CambioEstadosAVencerController < ApplicationController
       #flash[:notice] = "¡Usted no puede consultar los cambios de estados!"
       respond_to do |format|
         #format.html { redirect_to :controller => 'pagina_principal'}
-        format.html { render :nothing => true }
+        format.html { render :html => '' }
         format.xml { head :ok}
       end
     else

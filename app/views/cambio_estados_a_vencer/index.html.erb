@@ -1,0 +1,92 @@
+
+<!-- index.html.erb -->
+<!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+<!-- This program is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation, either version 3 of the License, or -->
+<!-- (at your option) any later version. -->
+
+<!-- This program is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+<!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1> Vencimientos </h1>
+<p> Se mostrarán los cambios de estados que están por
+  vencerse en 14 días. </p>
+
+<p> <i> Esta página no se recarga automáticamente:
+  <%= link_to 'Actualizar' %> </i></p>
+
+<% if @lst_ce_a_vencer.empty? %>
+  <p> No hay normas que tengan planificado algún cambio de estado. </p>
+<% end %>
+
+<ul>
+  <% @lst_ce_a_vencer.each do |ce|
+      if (ce.fecha_cambio >= Date.today)
+          # Aún no venció!
+  %>
+  <span class="noVencido">
+    <li> Cambio Pendiente
+      <ul>
+        <li> Número de Norma:<br />
+          <%= link_to ce.norma.numero, ce.norma, :target => "main" %>
+        </li>
+        <li> Fecha de Cambio: <br />
+          <%= ce.fecha_cambio.strftime("%d / %m / %Y") %>
+        </li>
+        <li> Estado a cambiar: <br />
+          <%= link_to h(ce.estado.nombre), ce.estado %>
+        </li>
+        <li>
+          <%= link_to 'Ver Cambio de Estado', ce, :target => "main"%> |
+          <%= link_to 'Ver Norma', ce.norma, :target => "main" %> |
+          <%= link_to "Aplicar cambio", {
+              :controller => "cambio_aplicados",
+              :action => "new",
+              :ce_id => ce.id},
+           :target => "main" %>
+
+        </li>
+      </ul>
+    </li>
+  </span>
+
+  <% else
+      # Ya venció
+  %>
+  <span class="vencido">
+    <li> Cambio Pendiente <b> Vencido </b>
+      <ul>
+        <li> Numero de Norma:
+          <%= link_to ce.norma.numero, ce.norma, :target => "main"%>            
+        </li>
+        <li> Fecha de Cambio:
+          <%= ce.fecha_cambio.strftime("%d / %m / %Y") %>
+        </li>
+        <li> Estado a cambiar: <br />
+          <%= link_to h(ce.estado.nombre), ce.estado %>
+        </li>
+        <li>
+          <%= link_to 'Ver Cambio de Estado', ce, :target => "main" %> |
+          <%= link_to 'Ver Norma', ce.norma, :target => "main" %> |
+          <%= link_to "Aplicar cambio", {
+              :controller => "cambio_aplicados",
+              :action => "new",
+              :ce_id => ce.id} ,
+           :target => "main" %>
+        </li>
+      </ul>
+    </li>
+  </span>
+  <% end
+  end %>
+</ul>
