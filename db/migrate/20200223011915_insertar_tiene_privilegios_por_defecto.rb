@@ -67,7 +67,4 @@ class InsertarTienePrivilegiosPorDefecto < ActiveRecord::Migration[5.2]
   def self.down
     TienePrivilegio.delete_all
   end
-
-  def change
-  end
 end

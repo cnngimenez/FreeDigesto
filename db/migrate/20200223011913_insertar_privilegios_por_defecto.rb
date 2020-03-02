@@ -25,6 +25,7 @@ class InsertarPrivilegiosPorDefecto < ActiveRecord::Migration[5.2]
 
   def self.up
     down
+
     # Para los usuarios
     crearPrivilegio(Usuario::PuedeConsultar)
     crearPrivilegio(Usuario::PuedeCrear)
@@ -142,11 +143,8 @@ class InsertarPrivilegiosPorDefecto < ActiveRecord::Migration[5.2]
     crearPrivilegio(TipoRelacion::PuedeEliminar)    
   end
 
-  def change
-  end
-
   protected
   def self.crearPrivilegio(nombre)
-    Privilegio.create(:nombre => nombre)
+    Privilegio.create nombre: nombre
   end
 end

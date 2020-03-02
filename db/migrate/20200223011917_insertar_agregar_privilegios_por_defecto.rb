@@ -90,6 +90,4 @@ class InsertarAgregarPrivilegiosPorDefecto < ActiveRecord::Migration[5.2]
     AgregarPrivilegio.delete_all
   end
 
-  def change
-  end
 end

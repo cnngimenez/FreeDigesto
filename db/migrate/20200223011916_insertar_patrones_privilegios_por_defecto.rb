@@ -25,7 +25,4 @@ class InsertarPatronesPrivilegiosPorDefecto < ActiveRecord::Migration[5.2]
   def self.down
     PatronPrivilegio.delete_all
   end
-
-  def change
-  end
 end

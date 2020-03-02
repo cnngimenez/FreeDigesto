@@ -22,20 +22,11 @@ class InsertarUsuariosPorDefecto < ActiveRecord::Migration[5.2]
   def self.up
     down
 
-    Usuario.create(:nombre => "root") do |u|
-      u.contrasena = "root"
-    end
-    
-    Usuario.create(:nombre => "consultor") do |u|
-      u.contrasena = ""
-    end
-    
+    Usuario.create nombre: "root", contrasena: "root"    
+    Usuario.create nombre: "consultor", contrasena: ""
   end
 
   def self.down
     Usuario.delete_all
-  end
-  
-  def change
   end
 end
