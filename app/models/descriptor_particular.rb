@@ -18,7 +18,7 @@
 
 # Jueves 07 De Octubre Del 2010    
 
-class DescriptorParticular < ApplicationRecord
+class DescriptorParticular < ApplicationRecord  
   #Privilegio:
   PuedeCrear = "Crear Descriptores Particulares"
   PuedeConsultar = "Consultar Descriptores Particulares"
@@ -32,7 +32,8 @@ class DescriptorParticular < ApplicationRecord
   #Valida que el nombre esté escrito
   validates_presence_of(:nombre, :message => "¡Debe escribir un nombre!")
   #Valida que el descriptor general haya sido seleccionado
-  validates_presence_of(
-    :nombre_descriptor_general => "¡Debe seleccionar un descriptor general!")
-
+  validates :descriptor_general,
+            presence: {
+              message: "¡Debe seleccionar un descriptor general!"
+            }
 end

@@ -25,12 +25,15 @@ class AgregarPrivilegio < ApplicationRecord
   PuedeEditar ="Editar Agregar Privilegio"
   PuedeEliminar = "Eliminar Agregar Privilegio"
 
-  belongs_to :Privilegio
-  belongs_to :Patron_privilegio
+  belongs_to :privilegio
+  belongs_to :patron_privilegio
 
   #Verificar que tiene un privilegio y un patrón de privilegios.
-  validates_presence_of(:privilegio,:message => "¡Debe escribir un privilegio!")
-  validates_presence_of(:patron_privilegio,
-                        :message => "¡Debe escribir un patron de privilegios!")
+  validates :privilegio, presence: {
+              message: "¡Debe escribir un privilegio!"
+            }
+  validates :patron_privilegio, presence: {
+              message: "¡Debe escribir un patron de privilegios!"
+            }
 
 end
