@@ -40,17 +40,20 @@ class CambioEstado < ApplicationRecord
   belongs_to :estado
 
   #claves primarias son: fecha_cambio, norma_id
-  validates_uniqueness_of :norma_id, :scope => [:fecha_cambio],
-                          :message => "¡Esa fecha de cambio para esa norma ya existe!"
+  validates_uniqueness_of(
+    :norma_id, :scope => [:fecha_cambio],
+    :message => "¡Esa fecha de cambio para esa norma ya existe!")
   validates_presence_of :fecha_cambio,
                         :message => "¡Debe ingresar una fecha de cambio!"
-  validates_presence_of :norma_id,
-                        :message => "¡Debe asignar una norma a este cambio de estado!"
+  validates_presence_of(
+    :norma_id,
+    :message => "¡Debe asignar una norma a este cambio de estado!")
   #¡deben estar también el estado y la causa!
   validates_presence_of :estado_id,
                         :message => "¡Debe elegir un estado!"
-  validates_presence_of :causa_cambio_estado_id,
-                        :message => "¡Debe elegir una causa de cambio de estado!"
+  validates_presence_of(
+    :causa_cambio_estado_id,
+    :message => "¡Debe elegir una causa de cambio de estado!")
 
 
   # Devuelve el último cambio de estado que se aplicó para la norma |norma|.
@@ -85,7 +88,6 @@ class CambioEstado < ApplicationRecord
   #
   # TODO: ¡Testear!
   #
-
   def CambioEstado::obtener_cambio_estados_aplicados(norma)
     # SELECT cambio_estados.* FROM cambio_estados, cambio_aplicados, estados
     # WHERE
@@ -98,14 +100,17 @@ class CambioEstado < ApplicationRecord
     #
     return CambioEstado.find(:all,
       :select => "cambio_estados.*",
-      :conditions => ["norma_id = " + norma.id.to_s + " AND cambio_aplicados.id = cambio_estados.id AND cambio_aplicados.fecha_aplicado = fecha_creacion AND estados.id = cambio_estados.estado_id"],
+      :conditions => ["norma_id = " + norma.id.to_s + " AND " +
+                     "cambio_aplicados.id = cambio_estados.id AND " +
+                     "cambio_aplicados.fecha_aplicado = fecha_creacion AND" +
+                     "estados.id = cambio_estados.estado_id"],
       :group => ["norma_id"],
       :order => "fecha_creacion DESC",
       :from => "cambio_estados, cambio_aplicados,estados")
   end
 
-  # Devuelve todos los cambios de estados programados de una norma, sean aplicados
-  # o no aplicados.
+  # Devuelve todos los cambios de estados programados de una norma,
+  # sean aplicados o no aplicados.
   #
   # Devuelve en forma de Array ordenado según |orden| y |desc_asc|
   # Los valores posibles para |orden| son las constantes:
@@ -162,8 +167,8 @@ class CambioEstado < ApplicationRecord
 
     # Borrar los cambios_aplicados si tiene y el cambio de estado de la lista.
     lst_cambios.each do |cambio_estado|
-      # Aparentemente puede haber más de un cambio_aplicado, pero en el diseño(MER)
-      # está esclarecido que esto no se debe hacer.
+      # Aparentemente puede haber más de un cambio_aplicado, pero en el
+      # diseño(MER) está esclarecido que esto no se debe hacer.
       # Sin embargo, es más eficiente un "delete_all" que un "destroy".
       CambioAplicado.delete_all(["cambio_estado_id = ?", cambio_estado.id])
       cambio_estado.destroy()
