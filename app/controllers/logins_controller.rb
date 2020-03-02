@@ -90,11 +90,13 @@ class LoginsController < ApplicationController
   # POST /logins
   # POST /logins.json
   def create
-    @login = Login.new(params[:login])
-    #devolver el user id en caso de que el login sea correct
-    #nil en caso contrario.
+    @login = Login.new login_params
+    
+    # devolver el user id en caso de que el login sea correct
+    # nil en caso contrario.
     login = Login.autenticar(
-      params[:login][:nombre_usuario],params[:login][:clave])
+      login_params[:nombre_usuario],
+      login_params[:clave])
 
     if not login.nil?
       #Login correcto.
@@ -165,4 +167,9 @@ class LoginsController < ApplicationController
     end
   end
 
+  private
+
+  def login_params
+    params.require(:login).permit(:nombre_usuario, :clave)
+  end
 end

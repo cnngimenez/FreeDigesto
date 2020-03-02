@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 2020_02_23_011917) do
 
   create_table "agregar_privilegios", force: :cascade do |t|
-    t.integer "Privilegio_id"
-    t.integer "Patron_privilegio_id"
+    t.integer "privilegio_id"
+    t.integer "patron_privilegio_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["Patron_privilegio_id"], name: "index_agregar_privilegios_on_Patron_privilegio_id"
-    t.index ["Privilegio_id"], name: "index_agregar_privilegios_on_Privilegio_id"
+    t.index ["patron_privilegio_id"], name: "index_agregar_privilegios_on_patron_privilegio_id"
+    t.index ["privilegio_id"], name: "index_agregar_privilegios_on_privilegio_id"
   end
 
   create_table "cambio_aplicados", force: :cascade do |t|
