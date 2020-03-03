@@ -46,9 +46,9 @@ class TienePrivilegio < ApplicationRecord
     end
 
     #Buscar con el usuario y con el privilegio.
-    encontrado = TienePrivilegio.find_by_usuario_id(
-      usuario_id,
-      :conditions => ["privilegio_id = ?",privid])
+    encontrado = TienePrivilegio.where(
+      usuario_id: usuario_id,
+      privilegio_id: privid).first
 
     #Si fue encontrado entonces
     return !encontrado.nil?
