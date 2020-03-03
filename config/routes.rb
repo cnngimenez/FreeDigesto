@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   get 'buscar_por_numero/index'
   get 'buscar_por_numero/buscar_numero'
   get 'buscar_por_numero/vista_impresion'
+
+  get 'ultimas_normas', to: 'ultimas_normas#index'
   
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
