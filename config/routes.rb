@@ -49,6 +49,21 @@ Rails.application.routes.draw do
   get 'buscar_por_numero/vista_impresion'
 
   get 'ultimas_normas', to: 'ultimas_normas#index'
+
+  get 'nueva_norma', to: 'nueva_norma#index'
+  get 'nueva_norma/guardar_norma'
+  get 'nueva_norma/agregar_comentarios'
+  get 'nueva_norma/guardar_comentarios'
+  get 'nueva_norma/agregar_citas'
+  get 'nueva_norma/guardar_citas'
+  get 'nueva_norma/subir_texto'
+  get 'nueva_norma/guardar_texto'
+  get 'nueva_norma/planificar_vencimientos'
+  get 'nueva_norma/planificar'
+  get 'nueva_norma/otro_plan'
+  get 'nueva_norma/crear_relaciones'
+  get 'nueva_norma/guardar_relacion'
+  get 'nueva_norma/otra_relacion'
   
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
