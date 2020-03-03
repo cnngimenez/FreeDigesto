@@ -79,7 +79,12 @@ Rails.application.routes.draw do
   get 'quitar_descriptor', to: 'quitar_descriptor#index'
   get 'quitar_descriptor/quitar_desc_gen'
   get 'quitar_descriptor/quitar_desc_part'
-  get 'quitar_descriptor/eliminar_posee_desc' 
+  get 'quitar_descriptor/eliminar_posee_desc'
+
+  get 'asignar_privilegios', to: 'asignar_privilegios#index'
+  get 'asignar_privilegios/asignar_patron'
+  get 'asignar_privilegios/aplicar_privilegios'
+  get 'asignar_privilegios/agregar_privilegios'
   
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
