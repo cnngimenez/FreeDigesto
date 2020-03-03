@@ -85,6 +85,8 @@ Rails.application.routes.draw do
   get 'asignar_privilegios/asignar_patron'
   get 'asignar_privilegios/aplicar_privilegios'
   get 'asignar_privilegios/agregar_privilegios'
+
+  get 'logout', to: 'logout#index'
   
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
