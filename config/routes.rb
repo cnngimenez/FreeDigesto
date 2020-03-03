@@ -25,6 +25,29 @@ Rails.application.routes.draw do
   get 'banner', to: 'banner#index'
   get 'cambio_estados_a_vencer', to: 'cambio_estados_a_vencer#index'
 
+  get 'buscar_por_descriptores', to: 'buscar_desc_part#index'
+  get 'buscar_por_descriptores/index'
+  get 'buscar_por_descriptores/buscar_desc_part'
+  get 'buscar_por_descriptores/elegir_desc_part'
+  get 'buscar_por_descriptores/otras_opciones'
+  get 'buscar_por_descriptores/buscar_normas'
+  get 'buscar_por_descriptores/vista_impresion'
+
+  get 'buscar_por_fecha', to: 'buscar_por_fecha#index'
+  get 'buscar_por_fecha/index'
+  get 'buscar_por_fecha/resultados'
+  get 'buscar_por_fecha/vista_impresion'
+
+  get 'buscar_por_texto', to: 'buscar_por_texto#index'
+  get 'buscar_por_texto/index'
+  get 'buscar_por_texto/buscar_texto'
+  get 'buscar_por_texto/vista_impresion'  
+  
+  get 'buscar_por_numero', to: 'buscar_por_numero#index'
+  get 'buscar_por_numero/index'
+  get 'buscar_por_numero/buscar_numero'
+  get 'buscar_por_numero/vista_impresion'
+  
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
 end
