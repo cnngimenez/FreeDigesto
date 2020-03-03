@@ -75,6 +75,11 @@ Rails.application.routes.draw do
   get 'agregar_descriptores/seleccionar_desc_part'
   get 'agregar_descriptores/agregar_desc_part'
   get 'agregar_descriptores/otro'
+
+  get 'quitar_descriptor', to: 'quitar_descriptor#index'
+  get 'quitar_descriptor/quitar_desc_gen'
+  get 'quitar_descriptor/quitar_desc_part'
+  get 'quitar_descriptor/eliminar_posee_desc' 
   
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
