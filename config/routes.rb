@@ -64,6 +64,17 @@ Rails.application.routes.draw do
   get 'nueva_norma/crear_relaciones'
   get 'nueva_norma/guardar_relacion'
   get 'nueva_norma/otra_relacion'
+
+  get 'modificar_norma', to: 'modificar_norma#index'
+  get 'modificar_norma/buscar_norma'
+  get 'modificar_norma/modificar_norma'
+
+  get 'agregar_descriptores', to: 'agregar_descriptores#index'
+  get 'agregar_descriptores/seleccionar_desc_gen'
+  get 'agregar_descriptores/agregar_desc_gen'
+  get 'agregar_descriptores/seleccionar_desc_part'
+  get 'agregar_descriptores/agregar_desc_part'
+  get 'agregar_descriptores/otro'
   
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
