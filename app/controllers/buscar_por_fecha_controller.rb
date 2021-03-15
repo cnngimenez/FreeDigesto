@@ -1,3 +1,4 @@
+# coding: utf-8
 
     # buscar_por_fecha_controller.rb
     # Copyright (C) 2011  Giménez, Christian N.

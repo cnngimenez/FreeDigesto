@@ -1,3 +1,4 @@
+# coding: utf-8
 
     # quitar_descriptor_controller.rb
     # Copyright (C) 2011  Giménez, Christian N.

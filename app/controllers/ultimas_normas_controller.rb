@@ -1,3 +1,4 @@
+# coding: utf-8
 
     # ultimas_normas_controller.rb
     # Copyright (C) 2011  Giménez, Christian N.

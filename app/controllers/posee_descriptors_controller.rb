@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
     # posee_descriptors_controller.rb
     # Copyright (C) 2010  Giménez, Christian N.

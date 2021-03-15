@@ -1,3 +1,4 @@
+# coding: utf-8
 
     # asignar_privilegios_controller.rb
     # Copyright (C) 2010  Giménez, Christian N.

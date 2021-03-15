@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
     # descriptor_generals_controller.rb
     # Copyright (C) 2010  Giménez, Christian N.
