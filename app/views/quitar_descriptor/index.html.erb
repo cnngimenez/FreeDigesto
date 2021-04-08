@@ -1,0 +1,35 @@
+
+    <!-- index.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1> Quitar Descriptores </h1>
+<p> Escriba el número y el tipo de la norma que desea quitar un descriptor</p>
+
+<% form_for :norma, :url => {:action => "quitar_desc_gen"} do |f|%>
+  <p>
+    <%= f.text_field :numero %>
+  </p>
+  <p>
+    <%= f.collection_select(:tipo, get_tipos_norma, :id, :nombre) %>
+  <p>
+    <%= f.submit "Comenzar >>" %>
+  </p>
+<% end %>
+
+<% link_to 'Principal', :controller => 'pagina_principal' %>

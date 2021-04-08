@@ -1,0 +1,62 @@
+
+    <!-- asignar_patron.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 21 De Octubre Del 2010     -->
+
+
+<h1> Asignar un Patrón de Privilegios a un Usuario </h1>
+
+<% if not @usuario.nil? %>
+  <p> Usted seleccionó el usuario <b><%= link_to h(@usuario.nombre), @usuario %> </b></p>
+
+  <p> Seleccione el patrón de privilegios a asignarle al usuario. </p>
+
+  <% form_for :patron, :url =>{:action => "agregar_privilegios", :usr_id => @usuario} do |f| %>
+    <%= f.error_messages %>
+    <p>
+      <%= f.collection_select(:patron_id, get_patrones_privilegios, :id, :nombre) %>
+    </p>
+    <p>
+      <%= f.submit "Asignar" %>
+    </p>
+  <% end %>
+
+<% else %>
+
+  <% form_for :patron, :url =>{:action => "agregar_privilegios"} do |f| %>
+    <%= f.error_messages %>
+    <p> Seleccione un usuario: </p>
+    <p>
+      <%= f.collection_select(:usr_id, get_usuarios, :id, :nombre) %>
+    </p>
+    <p> Patrón a aplicar: </p>
+    <p>
+      <%= f.collection_select(:patron_id, get_patrones_privilegios, :id, :nombre) %>
+    </p>
+    <p>
+      <%= f.submit "Asignar" %>
+    </p>
+  <% end %>
+  
+<% end %>
+
+<div class="comandos">
+  <p>
+    <%= link_to 'Volver', :action => 'index' %> |
+    <%= link_to 'Principal', :controller => 'pagina_principal' %>
+  </p>
+</div>

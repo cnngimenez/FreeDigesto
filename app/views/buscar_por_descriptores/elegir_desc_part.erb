@@ -1,0 +1,67 @@
+
+    <!-- elegir_desc_part.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<h1> Elija un Descriptor Particular </h1>
+
+<p>
+  <%  #link_to 'Editar', edit_norma_path(norma) %>
+  <%= link_to 'Principal', {:controller => "pagina_principal"}, :target => "main" %>
+</p>
+
+<script type="text/javascript">
+  function elegir(descriptor,descriptor_id){
+    var txt = document.getElementById("descriptor_particular")
+    var txt_id = document.getElementById("descriptor_particular_descriptor_particular_id")
+
+    txt.value = descriptor
+    txt_id.value = descriptor_id
+  }
+</script>
+
+<p> Si usted desea buscar las normas que posean un descriptor particular seleccione 
+el descriptor y presione "Buscar".</p>
+<p> Caso contrario, si desea buscar por el descriptor general "<%= @descgen.nombre %>"
+unicamente, deje en blanco este campo y presione "Buscar" sin seleccionar nada.</p>
+
+<%= link_to "Ningun Descriptor Particular", "javascript: elegir('','')" %>
+
+<% @lstDescParts.each do |desc| %>
+  <p>
+    <%= link_to desc.nombre, "javascript: elegir('#{desc.nombre}','#{desc.id}')" %>
+  </p>
+<% end %>
+
+<hr>
+<p> Usted eligió: </p>
+<input type="text" id ="descriptor_particular" readonly>
+  
+<% form_for :descriptor_particular, :url => {:action => "otras_opciones", :descgen_id => @descgen} do |f|%>
+  <%= f.text_field :descriptor_particular_id, :style => "visibility: hidden" %>
+  <p>
+    <%= f.submit "Siguiente >>" %>
+  </p>
+<% end %>
+
+<div class="comandos">
+  <p>
+    <%  #link_to 'Editar', edit_norma_path(norma) %>
+    <%= link_to 'Principal', {:controller => "pagina_principal"}, :target => "main" %>
+  </p>
+</div>

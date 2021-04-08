@@ -1,0 +1,171 @@
+
+    <!-- index.html.erb -->
+    <!-- Copyright (C) 2010  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Jueves 07 De Octubre Del 2010     -->
+
+
+<script type="text/javascript">
+  var ocultar_otros_campos = true;
+
+  /**
+   * Oculta todos los "otros campos".
+   */
+
+  function ocultar_campos(){
+    var otros_campos = document.getElementById("otros_campos");
+    var slct_estado = document.getElementById("buscar_texto_estado_id");
+    var slct_tipo_norma = document.getElementById("buscar_texto_tipo_norma_id");
+
+    otros_campos.style.visibility = "collapse";
+    slct_estado.style.visibility = "collapse";
+    slct_tipo_norma.style.visibility = "collapse";
+  }
+
+  /**
+   * Muestra todos los "otros campos".
+   */
+  function mostrar_campos(){
+    var otros_campos = document.getElementById("otros_campos");
+    var slct_estado = document.getElementById("buscar_texto_estado_id");
+    var chk_estado = document.getElementById("buscar_texto_estado_todos");
+    var slct_tipo_norma = document.getElementById("buscar_texto_tipo_norma_id");
+    var chk_tipo_norma = document.getElementById("buscar_texto_tipo_norma_todos");
+
+    otros_campos.style.visibility = "visible";
+
+
+    if (chk_estado.checked){
+      slct_estado.style.visibility = "visible";
+    }else{
+      slct_estado.style.visibility = "collapse";
+    }
+
+    if (chk_tipo_norma.checked){
+      slct_tipo_norma.style.visibility = "visible";
+    }else{
+      slct_tipo_norma.style.visibility = "collapse";
+    }
+  }
+
+  /**
+   * Chequea si debe mostrar u ocultar los dropdowns dependiendo de
+   * un checkbox que están más arriba.
+   */
+  function chequear_dropdowns(){
+    if (ocultar_otros_campos){
+      ocultar_campos();
+    }else{
+      mostrar_campos();
+    }
+  }
+
+  /**
+   *
+   */
+  function habilitar_otros_campos(){
+    ocultar_otros_campos = !ocultar_otros_campos;
+
+    if (ocultar_otros_campos){
+      //Ocultarlo...
+      ocultar_campos();
+    }else{
+      //Mostrarlo
+      mostrar_campos();
+    }
+
+  }
+</script>
+
+<h1> Buscar Normas por Contenido del Texto </h1>
+
+<p> Ingrese una frase, palabra o texto que la norma pueda contener </p>
+<p> Tenga especial cuidado si usted incorpora en el texto un símbolo especial. </p>
+
+<p>Ejemplos: </p>
+<ul>
+  <li> Si usted quiere buscar "espacios de m&sup2;" el símbolo &sup2; no es reconocido.
+  Deberá ingresar: "espacios de m&amp;sup2;".</li>
+  <li> Si usted quiere buscar "la f&egrave;rre" el símbolo &egrave; no es reconocido.
+  Deberá ingresar: "la f&amp;egrave;rre".</li>
+</ul>
+
+<%= link_to 'Un listado de símbolos con sus respectivos códigos en HTML puede encontrarlos
+haciendo clic aquí.', '/lista_simbolos.html' %>
+
+<% form_for :buscar_texto, :url => {:action => "buscar_texto"} do |f| %>
+  <%= f.error_messages  %>
+  <table><tr><td>
+  <p> Texto a buscar: </p>
+  <p>
+    <%= f.text_field :texto %>
+  </p>
+  <p> Buscar en: </p>
+  <p>
+    <%= f.check_box "buscar_en_texto", {:checked => true} %>
+  Texto de la norma </p>
+  <p>
+    <%= f.check_box "buscar_en_sumario" %>
+  Sumario de la norma </p>
+  <p>
+    <%= f.check_box "buscar_en_citas_doctorales" %>
+  Citas doctorales de la norma </p>
+  <p>
+    <%= f.check_box "buscar_en_citas_jurisprudenciales" %>
+  Citas jurisprudenciales de la norma </p>
+  <p>
+    <%= f.check_box "buscar_en_comentarios" %>
+    Comentarios de la norma
+  </p>
+  
+  <p><%=  f.submit "Buscar" %></p>
+
+
+  <%=  link_to "Otros campos:", "javascript: habilitar_otros_campos()" %>
+  </td></tr>
+  <tr id="otros_campos">
+  <td>
+    <p> Con algún estado en particular </p>
+    <p> <%= f.check_box "estado_todos", {:onchange => "javascript: chequear_dropdowns()"}%>
+      Sí, tener en cuenta este estado en particular: </p>
+        <%= f.collection_select(:estado_id,  get_estados, :id , :nombre)  %>
+
+    <p> Buscar dentro de algún tipo de norma en particular </p>
+    <p> <%= f.check_box "tipo_norma_todos", {:onchange => "javascript: chequear_dropdowns()", } %>
+      Sí, tener en cuenta un tipo de norma en particular:</p>
+      <%= f.collection_select(:tipo_norma_id, get_tipos_norma, :id, :nombre) %>
+
+    <p> Con alguna clasificación de general, particular, o todos </p>
+    <p> <%= f.radio_button("general_particular","Todos",{:checked => true}) %>
+    Todos las normas sean generales y/o particulares</p>
+    <p> <%= f.radio_button("general_particular","Generales") %>
+    Sólo las normas que son generales.</p>
+    <p> <%= f.radio_button("general_particular","Particulares") %>
+    Sólo las normas que sean particulares. </p>
+  </td>
+  </tr>
+  </table>
+<%  end %>
+
+<div class="comandos">
+  <p>
+    <%= link_to 'Principal', {:controller => "pagina_principal"}, :target => "main" %>
+  </p>
+</div>
+
+<script type="text/javascript">
+  ocultar_campos();
+</script>

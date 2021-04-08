@@ -1,0 +1,73 @@
+
+    <!-- otras_opciones.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<script type="text/javascript">
+  /**
+   * Muestra todos los "otros campos".
+   */
+  function chequear_dropdowns(){
+    var slct_estado = document.getElementById("otras_opciones_estado_id");
+    var chk_estado = document.getElementById("otras_opciones_estado_todos");
+    var slct_tipo_norma = document.getElementById("otras_opciones_tipo_norma_id");
+    var chk_tipo_norma = document.getElementById("otras_opciones_tipo_norma_todos");
+
+    if (chk_estado.checked){
+      slct_estado.style.visibility = "visible";
+    }else{
+      slct_estado.style.visibility = "collapse";
+    }
+
+    if (chk_tipo_norma.checked){
+      slct_tipo_norma.style.visibility = "visible";
+    }else{
+      slct_tipo_norma.style.visibility = "collapse";
+    }
+  }
+</script>
+
+<h1> Otras Opciones de Búsqueda </h1>
+
+<p> Aquí puede elegir otras opciones para buscar la norma que desee. </p>
+
+<% form_for :otras_opciones, :url => {:action => "buscar_normas",:descgen_id => @descgen, :descpart_id => @descpart} do |f| %>
+    <p> Con algún estado en particular </p>
+    <p> <%= f.check_box "estado_todos", {:onchange => "javascript: chequear_dropdowns()"}%>
+      Sí, tener en cuenta este estado en particular: </p>
+        <%= f.collection_select(:estado_id,  get_estados, :id , :nombre)  %>
+
+    <p> Buscar dentro de algún tipo de norma en particular </p>
+    <p> <%= f.check_box "tipo_norma_todos", {:onchange => "javascript: chequear_dropdowns()", } %>
+      Sí, tener en cuenta un tipo de norma en particular:</p>
+      <%= f.collection_select(:tipo_norma_id, get_tipos_norma, :id, :nombre) %>
+
+    <p> Con alguna clasificación de general, particular, o todos </p>
+    <p> <%= f.radio_button("general_particular","Todos",{:checked => true}) %>
+    Todos las normas sean generales y/o particulares</p>
+    <p> <%= f.radio_button("general_particular","Generales") %>
+    Sólo las normas que son generales.</p>
+    <p> <%= f.radio_button("general_particular","Particulares") %>
+    Sólo las normas que sean particulares. </p>
+
+    <p><%= f.submit("Buscar") %></p>
+<% end %>
+
+<script type="text/javascript">
+  chequear_dropdowns();
+</script>

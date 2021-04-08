@@ -1,0 +1,61 @@
+
+    <!-- otra_relacion.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1> Asistente para Crear Normas </h1>
+
+<p>Pasos del asistente: </p>
+<ol>
+  <li> Información básica de la norma </li>
+  <li> Subir texto de la norma </li>
+  <li> Planificar Cambios de Estados </li>
+  <li><b>Relacionar la norma</b><i>(Usted está aquí)</i></li>
+  <li> Determinar descriptores </li>
+  <ol>
+    <li>Determinar descriptor general</li>
+    <li>Determinar descriptor particular</li>
+  </ol>
+</ol>
+<br>
+
+<h2> ¿Qué desea hacer? </h2>
+
+<p> ¿Desea agregar otra relación? </p>
+
+<p>
+   <%= link_to 'Sí, crear una nueva relación.',
+     :action => "crear_relaciones",
+     :id => @norma %> <br />
+   <%= link_to 'No, continuar con el asistente.',
+         :controller => "agregar_descriptores", 
+         :action => 'seleccionar_desc_gen',
+         :id => @norma,
+         :creando_norma => true %> <br />
+
+</p>
+
+<br />
+
+<p>
+  <%= link_to 'Ir a la página principal', :controller => 'pagina_principal' %>
+</p>
+
+    
+
+

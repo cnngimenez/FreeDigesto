@@ -1,0 +1,69 @@
+
+    <!-- planificar_vencimientos.html.erb -->
+    <!-- Copyright (C) 2011  Giménez, Christian N. -->
+
+    <!-- This program is free software: you can redistribute it and/or modify -->
+    <!-- it under the terms of the GNU General Public License as published by -->
+    <!-- the Free Software Foundation, either version 3 of the License, or -->
+    <!-- (at your option) any later version. -->
+
+    <!-- This program is distributed in the hope that it will be useful, -->
+    <!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+    <!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+    <!-- GNU General Public License for more details. -->
+
+    <!-- You should have received a copy of the GNU General Public License -->
+    <!-- along with this program.  If not, see <http://www.gnu.org/licenses/>. -->
+
+    <!-- Martes 19 De Abril Del 2011     -->
+
+
+<h1> Asistente para Crear Normas </h1>
+
+<p>Pasos del asistente: </p>
+<ol>
+  <li> Información básica de la norma </li>
+  <li> Subir texto de la norma </li>
+  <li><b>Planificar Cambios de Estados</b><i>(Usted está aquí)</i></li>
+  <li> Relacionar la norma </li>
+  <li> Determinar descriptores </li>
+  <ol>
+    <li>Determinar descriptor general</li>
+    <li>Determinar descriptor particular</li>
+  </ol>
+</ol>
+<br>
+
+<h2>Planificar Cambio de Estado</h2>
+
+<% form_for(@cambio_estado, :url => {:action => "planificar", :id => @norma}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fecha_cambio %><br />
+    <%= f.date_select :fecha_cambio %>
+  </p>
+  <p>
+    <%= f.label :comentario %><br />
+    <%= f.text_area :comentario %>
+  </p>
+  <p>
+    <%= f.label :causa_cambio_estado_id %><br />
+    <%= f.collection_select(:causa_cambio_estado_id, get_causa_cambio_estados, :id, :nombre) %>
+  </p>
+  <p>
+    <%= f.label :estado_id %><br />
+    <%= f.collection_select(:estado_id, get_estados, :id, :nombre)  %>
+  </p>
+  <p>
+    <%= f.submit "Planificar Cambio" %>
+  </p>
+<% end %>
+
+<p>
+  <%= link_to 'Saltar paso del asistente',         
+         :action => 'crear_relaciones',
+         :id => @norma %> |
+  <%= link_to 'Cancelar el asistente e ir a la página principal', :controller => 'pagina_principal' %>
+</p>
+
