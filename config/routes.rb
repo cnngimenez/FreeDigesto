@@ -87,7 +87,8 @@ Rails.application.routes.draw do
   get 'asignar_privilegios/agregar_privilegios'
 
   get 'logout', to: 'logout#index'
-  
+
   get ':controller/:action/:id'
   get ':controller/:action/:id.:format'
+  get ':controller/:action'
 end
