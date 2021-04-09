@@ -37,7 +37,7 @@ class UltimasNormasController < ApplicationController
         @cant = params[:cant]
       end
       
-      @lstnormas = Norma.find(:all, :order => "id DESC", :limit => @cant)
+      @lstnormas = Norma.all.order(id: :desc).limit(@cant)
 
       respond_to do |format|
         format.html

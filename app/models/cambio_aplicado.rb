@@ -68,13 +68,15 @@ class CambioAplicado < ApplicationRecord
     # GROUP BY cambio_aplicados.id
     # ORDER BY orden  desc_asc
     #
-    return CambioAplicado.find(:all,
-      :select => "cambio_aplicados.*",
-      :conditions => "cambio_estados.norma_id = " + norma.id.to_s +
-        " AND cambio_estados.id = cambio_aplicados.cambio_estado_id",
-      :order => orden + " " + desc_asc,
-      :group => ["cambio_aplicados.id"],
-      :from => "cambio_aplicados, cambio_estados")
+    CambioAplicado.select('cambio_aplicados.*')
+                  .where([
+                           'cambio_estados.norma_id = ? AND cambio_estados.id = cambio_aplicados.cambio_estado_id',
+                           norma.id.to_s
+                         ])
+                  .order("#{orden} #{desc_asc}")
+                  .group(['cambio_aplicados.id'])
+                  .from('cambio_aplicados, cambio_estados')
+                  .all
   end
 
   # Devuelve verdadero si el cambio de estado fue instantáneo

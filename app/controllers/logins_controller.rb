@@ -34,7 +34,7 @@ class LoginsController < ApplicationController
         format.xml { head :ok}
       end
     else
-      @logins = Login.find(:all)
+      @logins = Login.all
 
       respond_to do |format|
         format.html # index.html.erb

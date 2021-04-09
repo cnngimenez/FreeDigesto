@@ -38,8 +38,8 @@
 
  <p> Ingrese los siguientes datos: </p>
 
-<% form_for(@norma,:url => {:action => "guardar_norma"}) do |f| %>    
-    <%= f.error_messages %>
+<%= form_for(@norma,:url => {:action => "guardar_norma"}) do |f| %>    
+  <%= render 'errors/error', model: @norma %>
   <p>
     <%= f.label :numero %><br />
     <%= f.text_field :numero %>

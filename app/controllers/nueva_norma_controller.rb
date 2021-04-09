@@ -67,7 +67,13 @@ class NuevaNormaController < ApplicationController
       end
     else
       #Si tiene derechos.
-      @norma = Norma.new(params[:norma])
+      normaparams = params[:norma].permit(
+        :numero, :sumario, :general, :tipo_norma_id,
+        :lugar_publicacion_id,
+        'fecha_sancion(3i)', 'fecha_sancion(2i)', 'fecha_sancion(1i)',
+        'fecha_promulgacion(3i)', 'fecha_promulgacion(2i)', 'fecha_promulgacion(1i)',
+        'fecha_publicacion(3i)', 'fecha_publicacion(2i)', 'fecha_publicacion(1i)')
+      @norma = Norma.new(normaparams)
       #@norma.numero = params[:crear_norma][:numero]
       #@norma.sumario = params[:crear_norma][:sumario]
       #@norma.general = params[:crear_norma][:general]

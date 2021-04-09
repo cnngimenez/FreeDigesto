@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # norma.rb
-# Copyright (C) 2010  Giménez, Christian N.
+# Copyright (C) 2010  Gimenez, Christian N.
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -68,19 +68,19 @@ class Norma < ApplicationRecord
   #
   # Valida que el campo Tipo_norma sea una entrada de la tabla "tipo_norma"
   # validates_inclusion_of(:tipo_norma,
-  #  :in => TipoNorma.find(:all),
+  #  :in => TipoNorma.all,
   #  :message => "¡Tipo de norma inválido!")
 
   # Valida que el campo Lugar_publicacion sea una entrada de la tabla
   # "lugar_publicacion".
   # validates_inclusion_of(:lugar_publicacion,
-  #  :in => LugarPublicacion.find(:all),
+  #  :in => LugarPublicacion.all
   #  :message => "¡El lugar de la publicación no es válido!")
 
 
   # Valida que el campo Estado sea una entrada de la tabla "estados"
   # validates_inclusion_of(:estado,
-  #   :in => Estado.find(:all),
+  #   :in => Estado.all,
   #   :message => "¡El estado no es válido!")
 
   # Valida que el número de norma sea único y no se repita en la tabla
@@ -114,53 +114,49 @@ class Norma < ApplicationRecord
   #
   # Comentarios: No chequea si ese estado_id existe.
   #
-  # Si la causa_cambio_estado es nil, entonces se utilizará la causa de cambio
+  # Si la causa_cambio_estado es nil, entonces se utilizara la causa de cambio
   # "Aplicada por el usuario"(CausaCambioEstado::AplicadoPorUsuario)
   #
   def Norma::asignar_estado(estado_id, comentario, norma,
                             causa_cambio_estado = nil)
-    #Crear el cambio estado
-    ce = CambioEstado.new()
+    # Crear el cambio estado
+    ce = CambioEstado.new
     ahora = Time.now
-    fecha_ahora = ahora.strftime("%Y-%m-%d")
+    fecha_ahora = ahora.strftime '%Y-%m-%d'
     ce.fecha_cambio = fecha_ahora
     ce.norma_id = norma.id
     ce.comentario = comentario
     ce.fecha_creacion = fecha_ahora
 
-
     cc = causa_cambio_estado
-    if (cc.nil?)
-      #no ingresó una causa de estado! agregar la "aplicada por el usuario"
-      cc = CausaCambioEstado.find(
-        :first,
-        :conditions => ["nombre = ?", CausaCambioEstado::AplicadoPorUsuario])
-      if (cc.nil?)
-        #No existe esa causa de cambio! crearla...
-        cc = CausaCambioEstado.crear_aplicado_por_usuario()
+    if cc.nil?
+      # no ingreso una causa de estado! agregar la "aplicada por el usuario"
+      cc = CausaCambioEstado.where(['nombre = ?', CausaCambioEstado::AplicadoPorUsuario]).first
+      if cc.nil?
+        # No existe esa causa de cambio! crearla...
+        cc = CausaCambioEstado.crear_aplicado_por_usuario
       end
     end
     ce.causa_cambio_estado_id = cc.id
     ce.estado_id = estado_id
 
-    if ce.save_with_validation(true)
-      ca = CambioAplicado.new()
-      ca.fecha_aplicado = ahora
-      ca.cambio_estado_id = ce.id
-      ca.comentario = comentario
-      ca.save_with_validation(true)
-    else
-      #El Cambio de Estado no se pudo incorporar a la Base... salir!
+    unless ce.save validate: true
+      # El Cambio de Estado no se pudo incorporar a la Base... salir!
       return nil
     end
 
-    return ca
+    ca = CambioAplicado.new
+    ca.fecha_aplicado = ahora
+    ca.cambio_estado_id = ce.id
+    ca.comentario = comentario
+    ca.save validate: true
+    ca
   end
 
-  #Devuelve el estado actual de la norma.
+  # Devuelve el estado actual de la norma.
   #
   def Norma::obtener_estado_actual(norma)
-    return CambioEstado.obtener_estado_actual(norma)
+    CambioEstado.obtener_estado_actual(norma)
   end
 
   # Devuelve todos los cambios aplicados (CambioAplicado) por los
@@ -210,28 +206,22 @@ class Norma < ApplicationRecord
     end
   end
 
-  # Buscar una norma por número y tipo de norma
+  # Buscar una norma por numero y tipo de norma
   #
-  #   [+numero+]      String con el número de norma
+  #   [+numero+]      String con el numero de norma
   #   [+tipo_norma+]  Un Tipo_Norma
   #
   def Norma::buscar_por_num(numero, tipo_norma)
-    Norma.find(
-        :first,
-        :conditions => "numero = \"" + numero + "\" AND
-        tipo_norma_id = " + tipo_norma.id.to_s)
+    Norma.where(['numero = ? AND tipo_norma_id = ?', numero, tipo_norma.id.to_s]).first
   end
 
-  # Buscar una norma por número y tipo de norma
+  # Buscar una norma por numero y tipo de norma
   #
-  #   [+numero+]        String con el número de norma
+  #   [+numero+]        String con el numero de norma
   #   [+tipo_norma_id+] El id del tipo de norma
   #
   def Norma::buscar_por_num_ids(numero, tipo_norma_id)
-    Norma.find(
-        :first,
-        :conditions => "numero = \"" + numero + "\" AND
-        tipo_norma_id = " + tipo_norma_id.to_s)
+    Norma.where(['numero = ? AND tipo_norma_id = ?', numero, tipo_norma_id.to_s]).first
   end
 
   #  Agrega las "otras condiciones" que son:
@@ -372,26 +362,26 @@ class Norma < ApplicationRecord
     return ord_string
   end
 
-  # Busco una serie de normas según un rango de fechas.
+  # Busco una serie de normas segun un rango de fechas.
   # Tipo de fecha puede ser:
   #   [+Norma::Tipo_fecha_sancion+]
-  #     Busca las normas dentro del rango en la fecha de sanción
+  #     Busca las normas dentro del rango en la fecha de sancion
   #   [+Norma::Tipo_fecha_promulgacion+]
-  #     Busca las normas dentro del rango en la fecha de promulgación
+  #     Busca las normas dentro del rango en la fecha de promulgacion
   #   [+Norma::Tipo_fecha_publicacion+]
-  #     Busca las normas dentro del rango en la fecha de publicación
+  #     Busca las normas dentro del rango en la fecha de publicacion
   #
   # Otras opciones es un hash con valores que pueden ser:
-  #   [+:estado_id+]      El id del estado con el cual limitar la búsqueda.
+  #   [+:estado_id+]      El id del estado con el cual limitar la busqueda.
   #   [+:tipo_norma_id+]  El id del tipo de norma con el cual limitar
-  #                       la búsqueda.
+  #                       la busqueda.
   #   [+:general+]        True si buscar normas de tipo general solamente,
-  #                       false si buscar sólo los particulares. Si no está
-  #                       (o es nil) se buscará tanto particulares
+  #                       false si buscar solo los particulares. Si no esta
+  #                       (o es nil) se buscara tanto particulares
   #                       como generales.
   #
-  # La opción +orden+ permite devolver en un orden determinado los
-  # resultados. Es un hash de un sólo
+  # La opcion +orden+ permite devolver en un orden determinado los
+  # resultados. Es un hash de un solo
   # elemento y puede ser:
   #   :numero => "ASC"
   #   :numero => "DESC"
@@ -401,50 +391,44 @@ class Norma < ApplicationRecord
   #   :creado => ...
   def Norma::buscar_por_fecha(fecha_desde, fecha_hasta, tipo_fecha,
                               otras_opciones = {}, orden = {})
-    condstring = tipo_fecha + " >= \"" + fecha_desde + "\" AND " +
-      tipo_fecha + " <= \"" + fecha_hasta + "\""
-
-    condiciones = [condstring]
+    condstring = "#{tipo_fecha} >= ? AND #{tipo_fecha} <= ?"
+    condiciones = [condstring, fecha_desde, fecha_hasta]
 
     condiciones = Norma.agregar_otras_opciones(condiciones, otras_opciones)
 
     orden = Norma.agregar_orden(orden)
 
-    return Norma.find(
-                      :all,
-                      :conditions => condiciones,
-                      :order => orden
-                      )
+    Norma.where(condiciones).order(orden).all
   end
 
-  # Busca una serie de normas según el número, o según una parte del número
+  # Busca una serie de normas segun el numero, o segun una parte del numero
   # de la norma
-  # Opcionalmente se puede buscar también el tipo de norma, el estado y si
+  # Opcionalmente se puede buscar tambien el tipo de norma, el estado y si
   # es particular o general.
   #
   # _Ejemplo:_
   #
-  # Para buscar las normas que terminen su número en "/10" se escribe:
+  # Para buscar las normas que terminen su numero en "/10" se escribe:
   #
   #   Norma.buscar_por_numero("/10")
   #
-  # Para buscar las normas que terminen su número en "/10" y con estado
+  # Para buscar las normas que terminen su numero en "/10" y con estado
   # Vigente(cuyo id es 3):
   #
   #   Norma.buscar_por_numero("/10", {:estado_id => 3})
   #
-  # Parámetros:
-  #   [+:estado_id+]      El id del estado con el cual limitar la búsqueda.
+  # Parametros:
+  #   [+:estado_id+]      El id del estado con el cual limitar la busqueda.
   #   [+:tipo_norma_id+]  El id del tipo de norma con el cual limitar la
-  #                       búsqueda.
+  #                       busqueda.
   #   [+:general+]        True si buscar normas de tipo general solamente,
-  #                       false si buscar sólo los particulares. Si no está
-  #                       (o es nil) se buscará tanto particulares como
+  #                       false si buscar solo los particulares. Si no esta
+  #                       (o es nil) se buscara tanto particulares como
   #                       generales.
   #
   #
-  # La opción +orden+ permite devolver en un orden determinado los
-  # resultados. Es un hash de un sólo elemento y puede ser:
+  # La opcion +orden+ permite devolver en un orden determinado los
+  # resultados. Es un hash de un solo elemento y puede ser:
   #   :numero => "ASC"
   #   :numero => "DESC"
   #   :fecha_sancion => ...
@@ -452,17 +436,13 @@ class Norma < ApplicationRecord
   #   :fecha_promulgacion => ...
   #   :creado => ...
   def Norma::buscar_por_numero(numero, otras_opciones = {}, orden = {})
-    condstring = "instr(numero,?)"
+    condstring = 'instr(numero,?)'
     condiciones = [condstring, numero]
 
     condiciones = Norma.agregar_otras_opciones(condiciones, otras_opciones)
     orden = Norma.agregar_orden(orden)
 
-    return Norma.find(
-      :all,
-      :conditions => condiciones,
-      :order => orden
-    )
+    Norma.where(condiciones).order(orden).all
   end
 
   # Busco un texto entre las normas. Puede buscarlo en el texto, en el sumario,
@@ -470,8 +450,8 @@ class Norma < ApplicationRecord
   #
   # +texto+ es el texto que se va a buscar.
   #
-  # +donde+ es dónde se va a buscar. Se puede dar varias opciones indicando que
-  # se mostrarán las normas que posean +texto+ en uno u otro lugar:
+  # +donde+ es donde se va a buscar. Se puede dar varias opciones indicando que
+  # se mostraran las normas que posean +texto+ en uno u otro lugar:
   #   [+:texto+]            Devuelve las normas que encuentre +texto+
   #                         en sus textos.
   #   [+:sumario+]          Devuelve las normas que encuentre +texto+
@@ -489,8 +469,8 @@ class Norma < ApplicationRecord
   # Devuelve todas las normas que posee en la palabra "municipio" en el texto
   # *y/o* en el comentario.
   #
-  # La opción +orden+ permite devolver en un orden determinado
-  # los resultados. Es un hash de un sólo elemento y puede ser:
+  # La opcion +orden+ permite devolver en un orden determinado
+  # los resultados. Es un hash de un solo elemento y puede ser:
   #   :numero => "ASC"
   #   :numero => "DESC"
   #   :fecha_sancion => ...
@@ -498,55 +478,53 @@ class Norma < ApplicationRecord
   #   :fecha_promulgacion => ...
   #   :creado => ...
   def Norma::buscar_por_texto(texto, donde = {}, otras_opciones = {}, orden = {})
-    if donde.empty?
-      return []
-    end
+    return [] if donde.empty?
 
-    condstring = ""
+    condstring = ''
     condiciones = [condstring]
 
-    #También eligió buscar en eltexto
+    # Tambien eligio buscar en eltexto
     if donde[:texto]
-      condstring = condstring + "instr(texto,?)"
+      condstring = "#{condstring} instr(texto,?)"
       condiciones.push(texto)
     end
 
-    #También eligió buscar en el sumario
+    # Tambien eligio buscar en el sumario
     if donde[:sumario]
       if condstring.empty?
-        condstring = "instr(sumario, ?)"
+        condstring = 'instr(sumario, ?)'
       else
-        condstring = condstring + "OR instr(sumario,?)"
+        condstring = "#{condstring} OR instr(sumario,?)"
       end
       condiciones.push(texto)
     end
 
-    #También eligió buscar en el citas doctorales
+    # Tambien eligio buscar en el citas doctorales
     if donde[:citas_doctorales]
-      if (condstring.empty?)
-          condstring = "instr(citas_doctorales,?)"
+      if condstring.empty?
+        condstring = 'instr(citas_doctorales,?)'
       else
-          condstring = condstring + "OR instr(citas_doctorales,?)"
-      end
-        condiciones.push(texto)
-    end
-
-    #También eligió buscar en el citas jurisprudenciales
-    if donde[:citas_juris]
-      if (condstring.empty?)
-        condstring = "instr(citas_jurisprudenciales,?)"
-      else
-        condstring = condstring + "OR instr(citas_jurisprudenciales,?)"
+        condstring = "#{condstring} OR instr(citas_doctorales,?)"
       end
       condiciones.push(texto)
     end
 
-    #También eligió buscar en el comentarios
-    if donde[:comentario]
-      if (condstring.empty?)
-        condstring = "instr(comentarios,?)"
+    # Tambien eligio buscar en el citas jurisprudenciales
+    if donde[:citas_juris]
+      if condstring.empty?
+        condstring = 'instr(citas_jurisprudenciales,?)'
       else
-        condstring = condstring + "OR instr(comentarios,?)"
+        condstring = "#{condstring} OR instr(citas_jurisprudenciales,?)"
+      end
+      condiciones.push(texto)
+    end
+
+    # Tambien eligio buscar en el comentarios
+    if donde[:comentario]
+      if condstring.empty?
+        condstring = 'instr(comentarios,?)'
+      else
+        condstring = "#{condstring} OR instr(comentarios,?)"
       end
       condiciones.push(texto)
     end
@@ -557,30 +535,26 @@ class Norma < ApplicationRecord
 
     orden = Norma.agregar_orden(orden)
 
-    return Norma.find(
-                      :all,
-                      :conditions => condiciones,
-                      :order => orden
-                      )
+    Norma.where(condiciones).order(orden).all
   end
 
-  # Busca las normas por descriptor particular ó general.
-  # Si +desc_part_id+ está presente, entonces busca las normas que posean
+  # Busca las normas por descriptor particular o general.
+  # Si +desc_part_id+ esta presente, entonces busca las normas que posean
   # ese descriptor particular.
-  # Si +desc_part_id+ no está presente sólo busca las que poseen el
+  # Si +desc_part_id+ no esta presente solo busca las que poseen el
   # descriptor general con id +desc_gen_id+.
   #
-  # También acepta +otras_opciones+:
-  #   [+:estado_id+]      El id del estado con el cual limitar la búsqueda.
+  # Tambien acepta +otras_opciones+:
+  #   [+:estado_id+]      El id del estado con el cual limitar la busqueda.
   #   [+:tipo_norma_id+]  El id del tipo de norma con el cual limitar la
-  #                       búsqueda.
+  #                       busqueda.
   #   [+:general+]        True si buscar normas de tipo general solamente,
-  #                       false si buscar sólo los particulares. Si no está
-  #                       (o es nil) se buscará tanto particulares como
+  #                       false si buscar solo los particulares. Si no esta
+  #                       (o es nil) se buscara tanto particulares como
   #                       generales.
   #
-  # La opción +orden+ permite devolver en un orden determinado los
-  # resultados. Es un hash de un sólo elemento y puede ser:
+  # La opcion +orden+ permite devolver en un orden determinado los
+  # resultados. Es un hash de un solo elemento y puede ser:
   #   :numero => "ASC"
   #   :numero => "DESC"
   #   :fecha_sancion => ...
@@ -589,50 +563,48 @@ class Norma < ApplicationRecord
   #   :creado => ...
   def Norma::buscar_por_descriptor(desc_gen_id, desc_part_id = nil,
                                    otras_opciones = {}, orden = {})
-    unless (desc_part_id.nil? or desc_part_id.empty?)
-      # Eligió un descriptor particular...
+    if !(desc_part_id.nil? || desc_part_id.empty?)
+      # Eligio un descriptor particular...
       # buscar por descriptor particular solamente.
       condiciones = [
-        "descriptor_particular_id = ? AND " +
-        "normas.id = posee_desc_parts.norma_id",
-        desc_part_id]
+        'descriptor_particular_id = ? AND normas.id = posee_desc_parts.norma_id',
+        desc_part_id
+      ]
 
       condiciones = Norma.agregar_otras_opciones(condiciones, otras_opciones)
 
       orden = Norma.agregar_orden(orden)
 
-      lst_posee_descs = PoseeDescPart.find(
-        :all,
-        :conditions => condiciones,
-        :select => "posee_desc_parts.*",
-        :from => "normas, posee_desc_parts",
-        :order => orden )
+      lst_posee_descs = PoseeDescPart.where(condiciones)
+                                     .select('posee_desc_parts.*')
+                                     .from('normas, posee_desc_parts')
+                                     .order(orden)
+                                     .all
     else
-      # No eligió un desc. particular...
+      # No eligio un desc. particular...
       # buscar por el descriptor general solamente.
       condiciones = [
-        "descriptor_general_id = ? AND " +
-        "normas.id = posee_descriptors.norma_id",
-        desc_gen_id]
+        'descriptor_general_id = ? AND normas.id = posee_descriptors.norma_id',
+        desc_gen_id
+      ]
 
       condiciones = Norma.agregar_otras_opciones(condiciones, otras_opciones)
 
       orden = Norma.agregar_orden(orden)
 
-      lst_posee_descs = PoseeDescriptor.find(
-        :all,
-        :conditions => condiciones,
-        :select => "posee_descriptors.*",
-        :from => "normas, posee_descriptors",
-        :order => orden)
+      lst_posee_descs = PoseeDescriptor.where(condiciones)
+                                       .select('posee_descriptors.*')
+                                       .from('normas, posee_descriptors')
+                                       .order(orden)
+                                       .all
     end
 
-    lst_normas = Array.new
+    lst_normas = []
     lst_posee_descs.each do |posee_desc|
       lst_normas.push(posee_desc.norma)
     end
 
-    return lst_normas
+    lst_normas
   end
 
   # Elimina la norma y <b>todos los registros necesarios</b> en la base de

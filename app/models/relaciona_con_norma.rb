@@ -53,13 +53,12 @@ class RelacionaConNorma < ApplicationRecord
   # Devuelve un arreglo con todos los "RelacionaConNorma".
   #
   def RelacionaConNorma::buscar_por_norma(norma)
-    if norma.nil?
-      return nil
-    end
-    return RelacionaConNorma.find(:all,
-      :conditions =>
-        "norma_a_id = " + norma.id.to_s + " OR
-        norma_b_id = " + norma.id.to_s)
+    return nil if norma.nil?
+
+    RelacionaConNorma.where([
+                              'norma_a_id = ? OR norma_b_id = ?',
+                              norma.id.to_s, norma.id.to_s,
+                            ]).all
   end
 
   # Devuelve todas las relaciones que estén desde norma ((|norma|)) hasta
@@ -71,12 +70,9 @@ class RelacionaConNorma < ApplicationRecord
   # Devuelve un arreglo de todas las "relaciones con normas".
   #
   def RelacionaConNorma::buscar_relaciones_salientes(norma)
-    if norma.nil?
-      return nil
-    end
-    return RelacionaConNorma.find(:all,
-      :conditions =>
-        ["norma_a_id = ? ", norma.id])
+    return nil if norma.nil?
+
+    RelacionaConNorma.where(['norma_a_id = ?', norma.id]).all
   end
 
   # Devuelve todas las relaciones que partan de cualquiera hacia ((|norma|)).
@@ -87,12 +83,9 @@ class RelacionaConNorma < ApplicationRecord
   # Devuelve un arreglo de todas las "RelacionaConNormas".
   #
   def RelacionaConNorma::buscar_relaciones_entrantes(norma)
-    if norma.nil?
-      return nil
-    end
-    return RelacionaConNorma.find(:all,
-      :conditions =>
-        ["norma_b_id = ?", norma.id])
+    return nil if norma.nil?
+
+    RelacionaConNorma.where(['norma_b_id = ?', norma.id]).all
   end
 
   # Elimino de mi tabla (_relaciona_con_norma_) todas las tuplas que
@@ -103,7 +96,7 @@ class RelacionaConNorma < ApplicationRecord
   # +norma_b+ el id dado por +norma_id+.
   #
   def RelacionaConNorma::eliminar_relaciones_por_norma(norma_id)
-    RelacionaConNorma.delete_all(["norma_a_id = ? OR norma_b_id = ?",
+    RelacionaConNorma.delete_all(['norma_a_id = ? OR norma_b_id = ?',
                                   norma_id, norma_id])
   end
 

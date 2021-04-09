@@ -41,7 +41,7 @@ class CausaCambioEstado < ApplicationRecord
   # Devuelve nil si ya existía. La causa recién creada en caso contrario.
   def CausaCambioEstado::crear_aplicado_por_usuario()
     cce = nil
-    if self.find(:first, :conditions => ["nombre = ?", AplicadoPorUsuario]).nil?
+    if self.where(["nombre = ?", AplicadoPorUsuario]).first.nil?
       cce = CausaCambioEstado.new()
       cce.nombre = CausaCambioEstado::AplicadoPorUsuario;
       cce.comentario = ""

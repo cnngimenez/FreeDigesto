@@ -55,12 +55,14 @@ class PoseeDescPart < ApplicationRecord
     # En este caso, no lo son pues si no se hubiese corregido este select,
     # devolvería el id de posee_descriptor con el mismo número que el id del
     # descriptor particular.
-    PoseeDescPart.find(:all,
-      :select => "posee_desc_parts.*",
-      :conditions => "norma_id = " + norma_id.to_s + " AND
-descriptor_particular_id = descriptor_particulars.id AND
-descriptor_particulars.descriptor_general_id = " + desc_gen_id.to_s,
-      :from => "posee_desc_parts, descriptor_particulars")
+    PoseeDescPart.select('posee_desc_parts.*')
+                 .where([
+                          'norma_id = ? AND descriptor_particular_id = descriptor_particulars.id AND ' \
+                          'descriptor_particulars.descriptor_general_id = ?', 
+                          norma_id.to_s, desc_gen_id.to_s
+                        ])
+                 .from('posee_desc_parts, descriptor_particulars')
+                 .all
   end
 
   # Elimino todas las tuplas de mi tabla(_posee_desc_part_) que estén
@@ -69,7 +71,7 @@ descriptor_particulars.descriptor_general_id = " + desc_gen_id.to_s,
   # "_norma_id_" el id dado por el parámetro +norma_id+.
   #
   def PoseeDescPart::eliminar_relaciones_por_norma(norma_id)
-    PoseeDescPart.delete_all(["norma_id = ?",norma_id])
+    PoseeDescPart.delete_all(['norma_id = ?',norma_id])
   end
 
 end

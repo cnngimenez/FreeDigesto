@@ -66,31 +66,30 @@ class AgregarDescriptoresController < ApplicationController
           params[:norma][:numero],params[:norma][:tipo])
       end
 
-      if (not @norma.nil?)
-        #Buscar descriptores.
-        @descriptores = DescriptorGeneral.find(:all, :order => "nombre ASC")
+      unless @norma.nil?
+        # Buscar descriptores.
+        @descriptores = DescriptorGeneral.all.order nombre: :asc 
 
         @descElegidos = []
 
-        #Obtener los ids de los descriptores que posee la norma @norma
+        # Obtener los ids de los descriptores que posee la norma @norma
         @descs= PoseeDescriptor.find_all_by_norma_id(@norma.id)
-        if (not @descs.nil?)
-          #Buscar todos los descriptores(los objetos) a partir del id.
+        unless @descs.nil?
+          # Buscar todos los descriptores(los objetos) a partir del id.
           @descs.each do |d|
             @descElegidos.push DescriptorGeneral.find(d.descriptor_general_id)
           end
         end
 
-
         respond_to do |format|
           format.html
-          #format.xml
+          # format.xml
         end
       else
-        #No existe tal norma!
-        #responder con error
+        # No existe tal norma!
+        # responder con error
         flash[:notice] = '¡No existe esa norma!'
-        #TODO: ¡mostrar mensaje para que vuelva!
+        # TODO: ¡mostrar mensaje para que vuelva!
         respond_to do |format|
           format.html {redirect_to :back}
         end

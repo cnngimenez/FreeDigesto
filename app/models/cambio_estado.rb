@@ -77,16 +77,16 @@ class CambioEstado < ApplicationRecord
   end
 
   # Devuelve los estados programados y aplicados, inclusive los cambios
-  # de estados instantáneos(con fecha de creación igual al de aplicación).
+  # de estados instantaneos(con fecha de creacion igual al de aplicacion).
   #
-  # Los cambios de estados se ordenan del más reciente al más antiguo, por lo
+  # Los cambios de estados se ordenan del mas reciente al mas antiguo, por lo
   # que el primer elemento del arreglo es el estado actual.
   #
   # Ejemplo:
   # Para obtener el estado actual:
   # CambioEstado.obtener_estados_aplicados(norma).first
   #
-  # TODO: ¡Testear!
+  # TODO: Testear!
   #
   def CambioEstado::obtener_cambio_estados_aplicados(norma)
     # SELECT cambio_estados.* FROM cambio_estados, cambio_aplicados, estados
@@ -98,21 +98,23 @@ class CambioEstado < ApplicationRecord
     # GROUP BY norma_id
     # ORDER BY fecha_creacion DESC
     #
-    return CambioEstado.find(:all,
-      :select => "cambio_estados.*",
-      :conditions => ["norma_id = " + norma.id.to_s + " AND " +
-                     "cambio_aplicados.id = cambio_estados.id AND " +
-                     "cambio_aplicados.fecha_aplicado = fecha_creacion AND" +
-                     "estados.id = cambio_estados.estado_id"],
-      :group => ["norma_id"],
-      :order => "fecha_creacion DESC",
-      :from => "cambio_estados, cambio_aplicados,estados")
+    CambioEstado.select('cambio_estados.*')
+                .where([
+                         'norma_id = ? AND cambio_aplicados.id = cambio_estados.id AND ' \
+                         'cambio_aplicados.fecha_aplicado = fecha_creacion AND ' \
+                         'estados.id = cambio_estados.estado_id',
+                         norma.id.to_s
+                       ])
+                .group(['norma_id'])
+                .order(fecha_creacion: :desc)
+                .from('cambio_estados, cambio_aplicados,estados')
+                .all
   end
 
   # Devuelve todos los cambios de estados programados de una norma,
   # sean aplicados o no aplicados.
   #
-  # Devuelve en forma de Array ordenado según |orden| y |desc_asc|
+  # Devuelve en forma de Array ordenado segun |orden| y |desc_asc|
   # Los valores posibles para |orden| son las constantes:
   #   * CambioEstado::PorFechaCambio
   #   * CambioEstado::PorFechaCreacion
@@ -122,9 +124,7 @@ class CambioEstado < ApplicationRecord
   #   * CambioEstado::Ascendente
   #
   def CambioEstado::obtener_cambio_estados(norma,orden,desc_asc)
-    if orden.nil? or desc_asc.nil?
-      return nil
-    end
+    return nil if orden.nil? || desc_asc.nil?
 
     # SELECT * FROM cambio_estados
     # WHERE
@@ -132,10 +132,9 @@ class CambioEstado < ApplicationRecord
     # ORDER BY orden desc_asc
     #
 
-    return CambioEstado.find(:all,
-      :conditions => ["norma_id = ?", norma.id],
-      :order => orden + " " + desc_asc
-    )
+    CambioEstado.where(['norma_id = ?', norma.id])
+                .order("#{orden} #{desc_asc}")
+                .all
   end
 
   # Devuelve los cambios de estados que estén a punto de vencer con
@@ -157,22 +156,19 @@ class CambioEstado < ApplicationRecord
   # Elimino de mi tabla todos los cambios de estados que sean de la norma
   # cuyo id sea +norma_id+.
   #
-  # También elimino los cambios aplicados si es que poseen tales cambios.
+  # Tambien elimino los cambios aplicados si es que poseen tales cambios.
   #
   def CambioEstado::eliminar_relaciones_por_norma(norma_id)
-    # Buscar los cambios de estados que estén relacionados con la norma
-    lst_cambios = CambioEstado.find(
-        :all,
-        :conditions => ["norma_id = ?", norma_id ])
+    # Buscar los cambios de estados que esten relacionados con la norma
+    lst_cambios = CambioEstado.where(['norma_id = ?', norma_id]).all
 
     # Borrar los cambios_aplicados si tiene y el cambio de estado de la lista.
     lst_cambios.each do |cambio_estado|
-      # Aparentemente puede haber más de un cambio_aplicado, pero en el
-      # diseño(MER) está esclarecido que esto no se debe hacer.
-      # Sin embargo, es más eficiente un "delete_all" que un "destroy".
-      CambioAplicado.delete_all(["cambio_estado_id = ?", cambio_estado.id])
-      cambio_estado.destroy()
+      # Aparentemente puede haber mas de un cambio_aplicado, pero en el
+      # diseno(MER) esta esclarecido que esto no se debe hacer.
+      # Sin embargo, es mas eficiente un "delete_all" que un "destroy".
+      CambioAplicado.delete_all(['cambio_estado_id = ?', cambio_estado.id])
+      cambio_estado.destroy
     end
-
   end
 end

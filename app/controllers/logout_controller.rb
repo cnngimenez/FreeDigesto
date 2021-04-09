@@ -20,7 +20,7 @@
 
 class LogoutController < ApplicationController
   def index
-    @usuario = Usuario.find_by_id(session[:current_user_id])
+    @usuario = Usuario.find(session[:current_user_id])
     if (@usuario.nil?)
       @login = nil
     else
