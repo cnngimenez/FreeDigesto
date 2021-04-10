@@ -37,7 +37,7 @@
 <h2>Planificar Cambio de Estado</h2>
 
 <% form_for(@cambio_estado, :url => {:action => "planificar", :id => @norma}) do |f| %>
-  <%= f.error_messages %>
+  <%= render 'errors/error', model: @cambio_estado %>
 
   <p>
     <%= f.label :fecha_cambio %><br />

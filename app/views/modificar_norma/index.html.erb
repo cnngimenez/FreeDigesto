@@ -23,7 +23,6 @@
 <p> Indique el número y tipo de norma que desea editar o agregarle un elemento faltante. </p>
 
 <% form_for :buscar_norma, :url => {:action => "buscar_norma"} do |f|%>
-  <%= f.error_messages %>
   <p> Número de la Norma: </p>
   <p>
     <%= f.text_field :numero %>

@@ -44,14 +44,14 @@ la relación de la norma 1 a la 2 y viceversa, sólo es necesario una </p>
 <p> Ejemplo: </p>
 <p> Supóngase dos normas: la norma 022/10 y la 010/80.  </p>
 <p> Si se desea relacionarlas sólo basta con agregar que la norma 022/10 se
-relaciona con la 010/80.</p>
+  relaciona con la 010/80.</p>
 <p> Una vez agregada esta relación, <b> no debe </b> agregar que la 010/80
-se relaciona con la norma 022/10.</p>
+  se relaciona con la norma 022/10.</p>
 
 <br />
 
 <% form_for @relaciona_con_norma, :url => {:action => "guardar_relacion", :id => @norma_inicial} do |f| %>      
-  <%= f.error_messages %>
+  <%= render 'errors/error', model: @relaciona_con_norma %>
   <p>
     Usted seleccionó la norma numero <b>
       <%= @norma_inicial.numero %>

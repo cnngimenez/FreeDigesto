@@ -168,7 +168,6 @@ sin seleccionar uno. </p>
 <textarea rows="10" cols="40" id="nombre_descriptor" readonly></textarea>
 
 <% form_for :descriptor_particular, :url => {:action => "agregar_desc_part", :id => @norma.id} do |f| %>
-  <%= f.error_messages %>
   <%= f.text_field :id, :style => "visibility : hidden" %>
   <p>
     <%= f.submit "Agregar" %>

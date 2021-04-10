@@ -41,10 +41,10 @@
 
 <% end %>
 
- <p> Ingrese el comentario para la norma <%= @norma.numero %>: </p>
+<p> Ingrese el comentario para la norma <%= @norma.numero %>: </p>
 
 <% form_for(@norma, :url => {:action => "guardar_comentarios", :modificando=> @esta_modificando, :id => @norma.id}) do |f| %>
-    <%= f.error_messages %>
+  <%= render 'errors/error', model: @norma %>
   <p>
     <%= f.label :comentarios %><br />
     <%= f.text_area :comentarios %>

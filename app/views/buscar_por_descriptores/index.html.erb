@@ -49,7 +49,6 @@
 <input type="text" id="descriptor_general" readonly>
 
 <% form_for :buscar_descriptor, :url => {:action => "buscar_desc_part"} do |f| %>
-  <%= f.error_messages %>
   <%= f.text_field :descriptor_general_id, :style => "visibility: hidden" %>
   <p>
     <%= f.submit "Siguiente >>" %>
