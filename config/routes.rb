@@ -92,4 +92,5 @@ Rails.application.routes.draw do
   get ':controller/:action/:id.:format'
   get ':controller/:action'
   post ':controller/:action'
+  patch ':controller/:action'
 end
