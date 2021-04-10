@@ -28,8 +28,8 @@ class BannerController < ApplicationController
       @login = nil
     else
       #Si hay alguien logeado...
-      @usuario = Usuario.find_by_id(session[:current_user_id])
-      @login = Login.find_by_nombre_usuario(@usuario.nombre)
+      @usuario = Usuario.find session[:current_user_id]
+      @login = Login.find_by nombre_usuario: @usuario.nombre
     end    
 
     respond_to do |format|

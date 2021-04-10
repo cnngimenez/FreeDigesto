@@ -73,7 +73,7 @@ class AgregarDescriptoresController < ApplicationController
         @descElegidos = []
 
         # Obtener los ids de los descriptores que posee la norma @norma
-        @descs= PoseeDescriptor.find_all_by_norma_id(@norma.id)
+        @descs = PoseeDescriptor.where norma_id: @norma.id
         unless @descs.nil?
           # Buscar todos los descriptores(los objetos) a partir del id.
           @descs.each do |d|
@@ -181,19 +181,16 @@ class AgregarDescriptoresController < ApplicationController
         #Buscar el descriptor general
         desc_gen = DescriptorGeneral.find(desc_gen_id)
         #Buscar sus particulares
-        lst_desc_parts = DescriptorParticular.find_all_by_descriptor_general_id(
-          desc_gen_id,
-          :order=> "nombre ASC")
+        lst_desc_parts = DescriptorParticular.where(descriptor_general_id: desc_gen_id).order(nombre: :asc)
         #Guardarlo en el arreglo
         @lstDescParts.push([desc_gen, lst_desc_parts])
       }
       #Dejar disponible los descriptores particulares elegidos...
       @descElegidos = []
-      @lstDescPartIds = PoseeDescPart.find_all_by_norma_id(@norma.id)
+      @lstDescPartIds = PoseeDescPart.where(norma_id: @norma.id)
       if (not @lstDescPartIds.nil?)
         @lstDescPartIds.each do |d|
-          @descElegidos.push DescriptorParticular.find(
-                               d.descriptor_particular_id)
+          @descElegidos.push DescriptorParticular.find(d.descriptor_particular_id)
         end
       end
 

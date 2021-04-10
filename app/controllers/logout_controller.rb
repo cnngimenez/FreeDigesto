@@ -24,7 +24,7 @@ class LogoutController < ApplicationController
     if (@usuario.nil?)
       @login = nil
     else
-      @login = Login.find_by_nombre_usuario(@usuario.nombre)
+      @login = Login.find_by nombre_usuario: @usuario.nombre
     end
 
     respond_to do |format|

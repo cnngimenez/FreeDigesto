@@ -60,7 +60,7 @@ class QuitarDescriptorController < ApplicationController
       end
 
       #Buscar los descriptores generales adecuados
-      @lst_desc_gens = PoseeDescriptor.find_all_by_norma_id(@norma)
+      @lst_desc_gens = PoseeDescriptor.where norma_id: @norma
       
 
       #Buscar los descriptores particulares adecuados

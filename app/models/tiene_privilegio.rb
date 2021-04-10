@@ -37,7 +37,7 @@ class TienePrivilegio < ApplicationRecord
   # Las acciones deben estar almacenadas en la tabla "Privilegios".
   def TienePrivilegio.usuario_tiene_privilegio(accion, usuario_id)
     # Buscar el Id de esa acción
-    privid = Privilegio.find_by_nombre(accion)
+    privid = Privilegio.find_by nombre: accion
 
     # Si no se encontró(retornó nil) devolver false(no tiene privilegios
     # porque no existe!)

@@ -442,7 +442,7 @@ class NuevaNormaController < ApplicationController
         #    #format.xml
         #end
         #redirect_to "/agregar_descriptores/seleccionar_desc_gen?id="+params[:id]
-        flash[:notice] = "¡Texto almacenado correctamente"
+        flash[:notice] = "Texto almacenado correctamente"
 
         if params[:modificando].nil? or params[:modificando].to_s == "false"
           respond_to do |format|
@@ -493,7 +493,11 @@ class NuevaNormaController < ApplicationController
         format.xml { head :ok}
       end
     else
-      @cambio_estado = CambioEstado.new(params[:cambio_estado])
+      ce_params = params[:cambio_estado].permit(
+        'fecha_cambio(1i)', 'fecha_cambio(2i)', 'fecha_cambio(3i)',
+        :comentario, :causa_cambio_estado_id, :estado_id
+      )
+      @cambio_estado = CambioEstado.new(ce_params)
       @norma = Norma.find(params[:id])
       @cambio_estado.norma =  @norma
       @cambio_estado.fecha_creacion = Time.now.strftime("%Y-%m-%d")
@@ -550,7 +554,7 @@ class NuevaNormaController < ApplicationController
   end
 
   def guardar_relacion
-     if not verificar_privilegios(RelacionaConNorma::PuedeCrear)
+    if not verificar_privilegios(RelacionaConNorma::PuedeCrear)
       #No tiene derechos para ver index.
       flash[:notice] = "¡Usted no puede crear las relaciones de normas!"
       respond_to do |format|
@@ -564,7 +568,8 @@ class NuevaNormaController < ApplicationController
     else
       @norma_inicial = Norma.find(params[:id])
 
-      @relaciona_con_norma = RelacionaConNorma.new(params[:relaciona_con_norma])
+      rcn_params = params.permit :relaciona_con_norma
+      @relaciona_con_norma = RelacionaConNorma.new rcn_params
       
       # Sí hubo una norma inicial.
       @relaciona_con_norma.norma_a = @norma_inicial

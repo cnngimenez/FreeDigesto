@@ -68,8 +68,7 @@ class BuscarPorDescriptoresController < ApplicationController
         @lstDescParts = []
         flash[:notice] = "¡No se encontró ese descriptor particular!"
       else
-        @lstDescParts = DescriptorParticular.find_all_by_descriptor_general_id(
-          @descgen.id, :order => "nombre ASC")
+        @lstDescParts = DescriptorParticular.where(descriptor_general_id: @descgen.id).order(nombre: :asc)
       end
 
       respond_to do |format|

@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
     sessionid = session[:current_user_id]
     if (sessionid.nil?)
       #Ingresó sin login... es el consultor
-      session[:current_user_id] = Usuario.find_by_nombre("consultor")
+      session[:current_user_id] = Usuario.find_by nombre: '"consultor'
       return TienePrivilegio.usuario_tiene_privilegio(
                accion,
                session[:current_user_id])
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   def usuario_actual
     if (session[:current_user_id].nil?)
       #Es nil la sesión actual: Entonces será el consultor...
-      session[:current_user_id] = Usuario.find_by_nombre("consultor")
+      session[:current_user_id] = Usuario.find_by nombre: 'consultor'
       @_usuario_actual ||= session[:current_user_id]
     else
       @_usuario_actual ||= session[:current_user_id] &&

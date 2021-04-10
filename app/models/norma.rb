@@ -35,11 +35,14 @@ class Norma < ApplicationRecord
   # belongs_to :estado
   belongs_to :tipo_norma
   belongs_to :lugar_publicacion
+  belongs_to :estado
 
   has_many :posee_descriptors
   has_many :posee_desc_parts
   has_many :cambio_estados
   has_many :relaciona_con_normas
+
+
 
   
   #Valida la presencia de los campos número de norma, sumario y texto.
