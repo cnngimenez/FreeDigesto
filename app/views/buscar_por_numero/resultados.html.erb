@@ -34,43 +34,43 @@
     | 
     <a href="javascript:enviar_formulario()"> Amigable a la Impresión </a>
   </p>
-<% form_for :buscar_numero,
-  :url => {:action => "vista_impresion" },
-  :html => {:id => 'form_imprimir' , :target => "_blank"} do |f| %>
+  <%= form_for :buscar_numero,
+    :url => {:action => "vista_impresion" },
+   :html => {:id => 'form_imprimir' , :target => "_blank"} do |f| %>
     <%= f.text_field(:numero, 
-	:value => params[:buscar_numero][:numero], 
-        :readonly => 'true',
-        :class => 'oculto') %>
+	             :value => params[:buscar_numero][:numero], 
+                     :readonly => 'true',
+                     :class => 'oculto') %>
     <%= f.text_field(:estado_todos,
-      :value => params[:buscar_numero][:estado_todos],
-      :readonly => 'true',
-      :class => 'oculto') %>
+                     :value => params[:buscar_numero][:estado_todos],
+                     :readonly => 'true',
+                     :class => 'oculto') %>
     <%= f.text_field(:estado_id,
-      :value => params[:buscar_numero][:estado_id],
-      :readonly => 'true', 
-      :class => 'oculto') %>
+                     :value => params[:buscar_numero][:estado_id],
+                     :readonly => 'true', 
+                     :class => 'oculto') %>
     <%= f.text_field(:tipo_norma_todos,
-      :value => params[:buscar_numero][:tipo_norma_todos],
-      :readonly => 'true',
-      :class => 'oculto') %>
+                     :value => params[:buscar_numero][:tipo_norma_todos],
+                     :readonly => 'true',
+                     :class => 'oculto') %>
     <%= f.text_field(:tipo_norma_id,
-      :value => params[:buscar_numero][:tipo_norma_id],
-      :readonly => 'true',
-      :class => 'oculto') %>
+                     :value => params[:buscar_numero][:tipo_norma_id],
+                     :readonly => 'true',
+                     :class => 'oculto') %>
     <%= f.text_field(:general_particular,
-      :value => params[:buscar_numero][:general_particular],
-      :readonly => 'true',
-      :class => 'oculto') %>    
+                     :value => params[:buscar_numero][:general_particular],
+                     :readonly => 'true',
+                     :class => 'oculto') %>    
     <%= f.text_field(:ordenar,
-      :value => params[:buscar_numero][:ordenar],
-      :readonly => 'true',
-      :class => 'oculto') %>    
+                     :value => params[:buscar_numero][:ordenar],
+                     :readonly => 'true',
+                     :class => 'oculto') %>    
     <%= f.text_field(:tipo_orden,
-      :value => params[:buscar_numero][:tipo_orden],
-      :readonly => 'true',
-      :class => 'oculto') %>    
-<% end %> 
-<% form_for :buscar_numero, :url => {:action => "buscar_numero"} do |f| %>
+                     :value => params[:buscar_numero][:tipo_orden],
+                     :readonly => 'true',
+                     :class => 'oculto') %>    
+  <% end %> 
+  <%= form_for :buscar_numero, :url => {:action => "buscar_numero"} do |f| %>
     <%= f.text_field(:numero, 
 	:value => params[:buscar_numero][:numero], 
         :readonly => 'true',

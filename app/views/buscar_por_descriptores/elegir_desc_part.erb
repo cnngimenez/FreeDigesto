@@ -52,7 +52,7 @@ unicamente, deje en blanco este campo y presione "Buscar" sin seleccionar nada.<
 <p> Usted eligió: </p>
 <input type="text" id ="descriptor_particular" readonly>
   
-<% form_for :descriptor_particular, :url => {:action => "otras_opciones", :descgen_id => @descgen} do |f|%>
+<%= form_for :descriptor_particular, :url => {:action => "otras_opciones", :descgen_id => @descgen} do |f|%>
   <%= f.text_field :descriptor_particular_id, :style => "visibility: hidden" %>
   <p>
     <%= f.submit "Siguiente >>" %>

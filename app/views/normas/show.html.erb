@@ -52,17 +52,17 @@
 
 <p>
   <strong>Tipo norma:</strong>
-  <%= @norma.tipo_norma %>
+  <%= @norma.tipo_norma&.nombre %>
 </p>
 
 <p>
   <strong>Estado:</strong>
-  <%= @norma.estado %>
+  <%= @norma.estado&.nombre %>
 </p>
 
 <p>
   <strong>Lugar publicacion:</strong>
-  <%= @norma.lugar_publicacion %>
+  <%= @norma.lugar_publicacion&.nombre %>
 </p>
 
 <%= link_to 'Edit', edit_norma_path(@norma) %> |

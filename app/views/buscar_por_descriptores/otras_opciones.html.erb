@@ -46,7 +46,7 @@
 
 <p> Aquí puede elegir otras opciones para buscar la norma que desee. </p>
 
-<% form_for :otras_opciones, :url => {:action => "buscar_normas",:descgen_id => @descgen, :descpart_id => @descpart} do |f| %>
+<%= form_for :otras_opciones, :url => {:action => "buscar_normas",:descgen_id => @descgen, :descpart_id => @descpart} do |f| %>
     <p> Con algún estado en particular </p>
     <p> <%= f.check_box "estado_todos", {:onchange => "javascript: chequear_dropdowns()"}%>
       Sí, tener en cuenta este estado en particular: </p>

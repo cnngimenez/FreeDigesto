@@ -43,7 +43,7 @@
 <% end %>
 <p> Ingrese las citas doctorales y jurisprudenciales para la norma <%= @norma.numero %>: </p>
 
-<% form_for(@norma, :url => {:action => "guardar_citas", :modificando => @esta_modificando, :id => @norma.id}) do |f| %>
+<%= form_for(@norma, :url => {:action => "guardar_citas", :modificando => @esta_modificando, :id => @norma.id}) do |f| %>
   <%= render 'errors/error', model: @norma %>
 
   <p>

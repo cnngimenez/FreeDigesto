@@ -50,7 +50,7 @@ la relación de la norma 1 a la 2 y viceversa, sólo es necesario una </p>
 
 <br />
 
-<% form_for @relaciona_con_norma, :url => {:action => "guardar_relacion", :id => @norma_inicial} do |f| %>      
+<%= form_for @relaciona_con_norma, :url => {:action => "guardar_relacion", :id => @norma_inicial} do |f| %>      
   <%= render 'errors/error', model: @relaciona_con_norma %>
   <p>
     Usted seleccionó la norma numero <b>

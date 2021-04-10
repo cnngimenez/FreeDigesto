@@ -21,7 +21,7 @@
 <h1> Quitar Descriptores </h1>
 <p> Escriba el número y el tipo de la norma que desea quitar un descriptor</p>
 
-<% form_for :norma, :url => {:action => "quitar_desc_gen"} do |f|%>
+<%= form_for :norma, :url => {:action => "quitar_desc_gen"} do |f|%>
   <p>
     <%= f.text_field :numero %>
   </p>

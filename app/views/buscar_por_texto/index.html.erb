@@ -100,13 +100,13 @@
   <li> Si usted quiere buscar "espacios de m&sup2;" el símbolo &sup2; no es reconocido.
   Deberá ingresar: "espacios de m&amp;sup2;".</li>
   <li> Si usted quiere buscar "la f&egrave;rre" el símbolo &egrave; no es reconocido.
-  Deberá ingresar: "la f&amp;egrave;rre".</li>
+    Deberá ingresar: "la f&amp;egrave;rre".</li>
 </ul>
 
 <%= link_to 'Un listado de símbolos con sus respectivos códigos en HTML puede encontrarlos
 haciendo clic aquí.', '/lista_simbolos.html' %>
 
-<% form_for :buscar_texto, :url => {:action => "buscar_texto"} do |f| %>
+<%= form_for :buscar_texto, :url => {:action => "buscar_texto"} do |f| %>
   <table><tr><td>
   <p> Texto a buscar: </p>
   <p>

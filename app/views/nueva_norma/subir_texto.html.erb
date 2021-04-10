@@ -54,8 +54,8 @@
  </ul>
 
  <p>A continuación, se le pedirá la ubicación del archivo que usted guardó en su
- computadora.</p>
- <% form_for :norma, @norma, :url => {:action => 'guardar_texto', :modificando => @esta_modificando, :id => @norma.id}, :html => {:multipart => true} do |f| %>
+   computadora.</p>
+ <%= form_for @norma, :url => {:action => 'guardar_texto', :modificando => @esta_modificando, :id => @norma.id}, :html => {:multipart => true} do |f| %>
   <p>
     <%= f.file_field :archivoHTML %>
   </p>

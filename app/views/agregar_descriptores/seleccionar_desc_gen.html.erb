@@ -168,14 +168,14 @@
 
 
 <% if (not params[:creando_norma].nil?) and (params[:creando_norma] == '1')  %>
-  <% form_for :descriptor, :url => {:action => 'agregar_desc_gen', :id => @norma.id, :creando_norma => '1' } do |f| %>
+  <%= form_for :descriptor, :url => {:action => 'agregar_desc_gen', :id => @norma.id, :creando_norma => '1' } do |f| %>
     <%= f.text_field :id, :style => "visibility : hidden"%>
     <p>
       <%= f.submit "Agregar" %>
     </p>
   <% end   %>
 <% else %>
-  <% form_for :descriptor, :url => {:action => 'agregar_desc_gen', :id => @norma.id} do |f| %>
+  <%= form_for :descriptor, :url => {:action => 'agregar_desc_gen', :id => @norma.id} do |f| %>
     <%= f.text_field :id , :style => "visibility : hidden"%>
     <p>
       <%= f.submit "Agregar" %>

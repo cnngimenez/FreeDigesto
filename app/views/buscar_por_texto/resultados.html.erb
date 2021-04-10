@@ -34,45 +34,45 @@
     <a href="javascript:enviar_formulario()"> Amigable a la Impresión </a>
   </p>
 
-<% form_for :buscar_texto,
-  :url => {:action => "vista_impresion" },
-  :html => {:class=> 'oculto', :id => 'form_imprimir' , :target => "_blank"} do |f| %>
+  <%= form_for :buscar_texto,
+    :url => {:action => "vista_impresion" },
+   :html => {:class=> 'oculto', :id => 'form_imprimir' , :target => "_blank"} do |f| %>
     <%= f.text_field(:texto,
-      :value => params[:buscar_texto][:texto], :readonly => 'true') %>
+                     :value => params[:buscar_texto][:texto], :readonly => 'true') %>
     <%= f.text_field(:buscar_en_texto,
-      :value => params[:buscar_texto][:buscar_en_texto], :readonly => 'true') %>
+                     :value => params[:buscar_texto][:buscar_en_texto], :readonly => 'true') %>
     <%= f.text_field(:buscar_en_sumario,
-      :value => params[:buscar_texto][:buscar_en_sumario], :readonly => 'true') %>
+                     :value => params[:buscar_texto][:buscar_en_sumario], :readonly => 'true') %>
     <%= f.text_field(:buscar_en_citas_doctorales,
-      :value => params[:buscar_texto][:buscar_en_citas_doctorales], :readonly => 'true') %>
+                     :value => params[:buscar_texto][:buscar_en_citas_doctorales], :readonly => 'true') %>
     <%= f.text_field(:buscar_en_citas_jurisprudenciales,
-      :value => params[:buscar_texto][:buscar_en_citas_jurisprudenciales], :readonly => 'true') %>
+                     :value => params[:buscar_texto][:buscar_en_citas_jurisprudenciales], :readonly => 'true') %>
     <%= f.text_field(:buscar_en_comentarios,
-      :value => params[:buscar_texto][:buscar_en_comentarios], :readonly => 'true') %>
+                     :value => params[:buscar_texto][:buscar_en_comentarios], :readonly => 'true') %>
     <%= f.text_field(:estado_todos,
-      :value => params[:buscar_texto][:estado_todos],
-      :readonly => 'true') %>
+                     :value => params[:buscar_texto][:estado_todos],
+                     :readonly => 'true') %>
     <%= f.text_field(:estado_id,
-      :value => params[:buscar_texto][:estado_id],
-      :readonly => 'true') %>
+                     :value => params[:buscar_texto][:estado_id],
+                     :readonly => 'true') %>
     <%= f.text_field(:tipo_norma_todos,
-      :value => params[:buscar_texto][:tipo_norma_todos],
-      :readonly => 'true') %>
+                     :value => params[:buscar_texto][:tipo_norma_todos],
+                     :readonly => 'true') %>
     <%= f.text_field(:tipo_norma_id,
-      :value => params[:buscar_texto][:tipo_norma_id],
-      :readonly => 'true') %>
+                     :value => params[:buscar_texto][:tipo_norma_id],
+                     :readonly => 'true') %>
     <%= f.text_field(:general_particular,
-      :value => params[:buscar_texto][:general_particular],
-      :readonly => 'true') %>
+                     :value => params[:buscar_texto][:general_particular],
+                     :readonly => 'true') %>
     <%= f.text_field(:ordenar,
-        :value => params[:buscar_texto][:ordenar],
-    :readonly => 'true') %>
+                     :value => params[:buscar_texto][:ordenar],
+                     :readonly => 'true') %>
     <%= f.text_field(:tipo_orden,
-        :value => params[:buscar_texto][:tipo_orden],
-    :readonly => 'true') %>
-<% end %>
+                     :value => params[:buscar_texto][:tipo_orden],
+                     :readonly => 'true') %>
+  <% end %>
 
-<% form_for :buscar_texto, :url => {:action => "buscar_texto"} do |f| %>
+  <%= form_for :buscar_texto, :url => {:action => "buscar_texto"} do |f| %>
     <%= f.text_field(:texto,
       :value => params[:buscar_texto][:texto],
     :readonly => 'true',

@@ -39,7 +39,7 @@
 <p> Escriba el número y el tipo de la norma que desea agregar un descriptor</p>
 
 
-<% form_for :norma, :url => {:action => "seleccionar_desc_gen"} do |f|%>
+<%= form_for :norma, :url => {:action => "seleccionar_desc_gen"} do |f|%>
   <p>
     <%= f.text_field :numero %>
   </p>

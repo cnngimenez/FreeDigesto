@@ -37,13 +37,13 @@
    <h2> Paso 1: Información básica de la norma</h2>
 
 <% else %>
-  <h1> Editando los Comentarios de la <%= link_to @norma.tipo_norma.nombre + " " + @norma.numero, @norma, :target => "_blank" %></h1>
+   <h1> Editando los Comentarios de la <%= link_to @norma.tipo_norma.nombre + " " + @norma.numero, @norma, :target => "_blank" %></h1>
 
 <% end %>
 
 <p> Ingrese el comentario para la norma <%= @norma.numero %>: </p>
 
-<% form_for(@norma, :url => {:action => "guardar_comentarios", :modificando=> @esta_modificando, :id => @norma.id}) do |f| %>
+<%= form_for(@norma, :url => {:action => "guardar_comentarios", :modificando=> @esta_modificando, :id => @norma.id}) do |f| %>
   <%= render 'errors/error', model: @norma %>
   <p>
     <%= f.label :comentarios %><br />

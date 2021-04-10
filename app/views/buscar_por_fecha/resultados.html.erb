@@ -31,49 +31,49 @@
     <%= link_to 'Volver a buscar por fecha', :action => 'index' %> |
     <%= link_to 'Principal', {:controller => "pagina_principal"}, :target => "main" %> |
     <a href="javascript:enviar_formulario()"> Amigable a la Impresión </a>
-</p>
+  </p>
 
-<% form_for :buscar_fecha,
-  :url => {:action => "vista_impresion" },
-  :html => {:class => 'oculto', :id => 'form_imprimir' , :target => "_blank"} do |f| %>
+  <%= form_for :buscar_fecha,
+    :url => {:action => "vista_impresion" },
+   :html => {:class => 'oculto', :id => 'form_imprimir' , :target => "_blank"} do |f| %>
     <%= f.text_field(:buscar_por,
-        :value => params[:buscar_fecha][:buscar_por], :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:buscar_por], :readonly => 'true') %>
     <%= f.text_field('fecha_desde(1i)',
-        :value => params[:buscar_fecha]['fecha_desde(1i)'], :readonly => 'true') %>
+                     :value => params[:buscar_fecha]['fecha_desde(1i)'], :readonly => 'true') %>
     <%= f.text_field('fecha_desde(2i)',
-        :value => params[:buscar_fecha]['fecha_desde(2i)'], :readonly => 'true') %>
+                     :value => params[:buscar_fecha]['fecha_desde(2i)'], :readonly => 'true') %>
     <%= f.text_field('fecha_desde(3i)',
-        :value => params[:buscar_fecha]['fecha_desde(3i)'], :readonly => 'true') %>
+                     :value => params[:buscar_fecha]['fecha_desde(3i)'], :readonly => 'true') %>
     <%= f.text_field('fecha_hasta(1i)',
-        :value => params[:buscar_fecha]['fecha_hasta(1i)'], :readonly => 'true') %>
+                     :value => params[:buscar_fecha]['fecha_hasta(1i)'], :readonly => 'true') %>
     <%= f.text_field('fecha_hasta(2i)',
-        :value => params[:buscar_fecha]['fecha_hasta(2i)'], :readonly => 'true') %>
+                     :value => params[:buscar_fecha]['fecha_hasta(2i)'], :readonly => 'true') %>
     <%= f.text_field('fecha_hasta(3i)',
-        :value => params[:buscar_fecha]['fecha_hasta(3i)'], :readonly => 'true') %>
+                     :value => params[:buscar_fecha]['fecha_hasta(3i)'], :readonly => 'true') %>
     <%= f.text_field(:estado_todos,
-      :value => params[:buscar_fecha][:estado_todos],
-      :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:estado_todos],
+                     :readonly => 'true') %>
     <%= f.text_field(:estado_id,
-      :value => params[:buscar_fecha][:estado_id],
-      :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:estado_id],
+                     :readonly => 'true') %>
     <%= f.text_field(:tipo_norma_todos,
-      :value => params[:buscar_fecha][:tipo_norma_todos],
-      :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:tipo_norma_todos],
+                     :readonly => 'true') %>
     <%= f.text_field(:tipo_norma_id,
-      :value => params[:buscar_fecha][:tipo_norma_id],
-      :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:tipo_norma_id],
+                     :readonly => 'true') %>
     <%= f.text_field(:general_particular,
-      :value => params[:buscar_fecha][:general_particular],
-      :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:general_particular],
+                     :readonly => 'true') %>
     <%= f.text_field(:tipo_orden,
-        :value => params[:buscar_fecha][:tipo_orden],
-        :readonly => 'true') %>
+                     :value => params[:buscar_fecha][:tipo_orden],
+                     :readonly => 'true') %>
     <%= f.text_field(:ordenar,
-        :value => params[:buscar_fecha][:ordenar],
-        :readonly => 'true') %>
-<% end %>
+                     :value => params[:buscar_fecha][:ordenar],
+                     :readonly => 'true') %>
+  <% end %>
 
-<% form_for :buscar_fecha, :url => {:action => "resultados"} do |f| %>
+  <%= form_for :buscar_fecha, :url => {:action => "resultados"} do |f| %>
     <%= f.text_field(:buscar_por,
         :value => params[:buscar_fecha][:buscar_por], :readonly => 'true',
     :class => 'oculto') %>

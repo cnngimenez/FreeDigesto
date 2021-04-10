@@ -25,7 +25,7 @@
 
   <p> Seleccione el patrón de privilegios a asignarle al usuario. </p>
 
-  <% form_for :patron, :url =>{:action => "agregar_privilegios", :usr_id => @usuario} do |f| %>
+  <%= form_for :patron, :url =>{:action => "agregar_privilegios", :usr_id => @usuario} do |f| %>
     <p>
       <%= f.collection_select(:patron_id, get_patrones_privilegios, :id, :nombre) %>
     </p>
@@ -36,7 +36,7 @@
 
 <% else %>
 
-  <% form_for :patron, :url =>{:action => "agregar_privilegios"} do |f| %>
+  <%= form_for :patron, :url =>{:action => "agregar_privilegios"} do |f| %>
     <p> Seleccione un usuario: </p>
     <p>
       <%= f.collection_select(:usr_id, get_usuarios, :id, :nombre) %>
